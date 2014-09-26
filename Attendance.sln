@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Attendance.WebApi", "Attend
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Attendance.WebApi.Tests", "Attendance.WebApi.Tests\Attendance.WebApi.Tests.csproj", "{181D7AA4-3CCF-4AF8-971E-C6462C0888FE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Attendance.DataAccess", "Attendance.DataAccess\Attendance.DataAccess.csproj", "{DF01D1DE-CE01-4895-906F-554E223BC9EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Attendance.DataAccess.Tests", "Attendance.DataAccess.Tests\Attendance.DataAccess.Tests.csproj", "{7B737746-13DF-4367-AEBF-FBF8F406A753}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{181D7AA4-3CCF-4AF8-971E-C6462C0888FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{181D7AA4-3CCF-4AF8-971E-C6462C0888FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{181D7AA4-3CCF-4AF8-971E-C6462C0888FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF01D1DE-CE01-4895-906F-554E223BC9EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF01D1DE-CE01-4895-906F-554E223BC9EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF01D1DE-CE01-4895-906F-554E223BC9EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF01D1DE-CE01-4895-906F-554E223BC9EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B737746-13DF-4367-AEBF-FBF8F406A753}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B737746-13DF-4367-AEBF-FBF8F406A753}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B737746-13DF-4367-AEBF-FBF8F406A753}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B737746-13DF-4367-AEBF-FBF8F406A753}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
