@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Attendance.WebApi.Models
+namespace Attendance.DataAccess.Models
 {
     public class Person
     {
