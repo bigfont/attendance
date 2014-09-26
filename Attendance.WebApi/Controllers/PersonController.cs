@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Attendance.WebApi.Models;
+using Attendance.DataAccess.Models;
 
 namespace Attendance.WebApi.Controllers
 {
