@@ -117,6 +117,9 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config" />
+    <Content Include="connections.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

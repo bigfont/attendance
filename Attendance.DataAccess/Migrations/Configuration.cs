@@ -4,6 +4,7 @@ namespace Attendance.DataAccess.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using Attendance.DataAccess.Models;
 
     internal sealed class Configuration : DbMigrationsConfiguration<Attendance.DataAccess.DAL.AttendanceContext>
     {
@@ -19,13 +20,13 @@ namespace Attendance.DataAccess.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data. E.g.
             //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            context.Persons.AddOrUpdate(
+              p => p.FirstName,
+              new Person { FirstName = "Andrew Peters" },
+              new Person { FirstName = "Brice Lambson" },
+              new Person { FirstName = "Rowan Miller" }
+            );
+            
         }
     }
 }

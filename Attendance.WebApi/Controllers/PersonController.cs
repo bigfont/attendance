@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Attendance.DataAccess.Models;
+using Attendance.DataAccess.DAL;
 
 namespace Attendance.WebApi.Controllers
 {
@@ -18,7 +19,9 @@ namespace Attendance.WebApi.Controllers
 
         public IEnumerable<Person> GetAllPersons()
         {
-            return persons;
+            AttendanceContext db = new AttendanceContext();
+            IEnumerable<Person> personsDb = db.Persons;
+            return personsDb;
         }
 
         public IHttpActionResult GetPerson(int id)
