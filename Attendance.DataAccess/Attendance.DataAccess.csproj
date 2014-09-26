@@ -105,9 +105,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\AttendanceContext.cs" />
+    <Compile Include="Migrations\201409262205179_InitialCreate.cs" />
+    <Compile Include="Migrations\201409262205179_InitialCreate.Designer.cs">
+      <DependentUpon>201409262205179_InitialCreate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201409262205179_InitialCreate.resx">
+      <DependentUpon>201409262205179_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
