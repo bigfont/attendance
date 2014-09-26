@@ -19,6 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <ApplicationInsightsResourceId>/subscriptions/14929cfc-3501-48cf-a5c9-b24a7daaf694/resourcegroups/Default-ApplicationInsights-CentralUS/providers/microsoft.insights/components/Attendance.WebApi</ApplicationInsightsResourceId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,6 +41,12 @@
   <ItemGroup>
     <Reference Include="Microsoft.ApplicationInsights">
       <HintPath>..\packages\Microsoft.ApplicationInsights.0.10.0-build17704\lib\net40\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights.RuntimeTelemetry">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.RuntimeTelemetry.0.10.0-build17704\lib\net45\Microsoft.ApplicationInsights.RuntimeTelemetry.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights.Web">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.0.10.0-build17704\lib\net45\Microsoft.ApplicationInsights.Web.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Diagnostics.Tracing.EventSource">
@@ -89,6 +96,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="scripts\ai.js" />
+    <Content Include="scripts\ai.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -96,6 +105,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -111,7 +121,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
