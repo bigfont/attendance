@@ -30,7 +30,7 @@ namespace Attendance.WebApi.Controllers
         }
 
         // $body = @{ FirstName = "Shaun" } | ConvertTo-JSON
-        // Invoke-RestMethod http://localhost/Attendance.WebApi/api/person -Method POST -ContentType "application/json" -Body $body
+        // Invoke-RestMethod http://localhost/Attendance.WebApi/api/person -Method POST -ContentType "application/json" -Body $body -Debug
         public HttpResponseMessage PostPerson(Person person)
         {
             // see also
