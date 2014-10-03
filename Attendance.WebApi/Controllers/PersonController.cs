@@ -11,12 +11,6 @@ namespace Attendance.WebApi.Controllers
 {
     public class PersonController : ApiController
     {
-        private Person[] persons = new Person[] { 
-        
-            new Person() { Id = 01, FirstName = "Anjali", LastName = "Moreau" }, 
-            new Person() { Id = 02, FirstName = "Noah", LastName = "Jacobson" }        
-        };
-
         public IEnumerable<Person> GetAllPersons()
         {
             AttendanceContext db = new AttendanceContext();
@@ -26,7 +20,8 @@ namespace Attendance.WebApi.Controllers
 
         public IHttpActionResult GetPerson(int id)
         {
-            var person = persons.FirstOrDefault(p => p.Id == id);
+            AttendanceContext db = new AttendanceContext();
+            var person = db.Persons.FirstOrDefault(p => p.Id == id);
             if (person == null)
             {
                 return NotFound();
