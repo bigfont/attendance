@@ -112,6 +112,10 @@
     <Compile Include="Migrations\201410032004094_EventAndVisit.Designer.cs">
       <DependentUpon>201410032004094_EventAndVisit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201410032012126_SeedEventsAndVisits.cs" />
+    <Compile Include="Migrations\201410032012126_SeedEventsAndVisits.Designer.cs">
+      <DependentUpon>201410032012126_SeedEventsAndVisits.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\Person.cs" />
@@ -124,6 +128,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201410032004094_EventAndVisit.resx">
       <DependentUpon>201410032004094_EventAndVisit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410032012126_SeedEventsAndVisits.resx">
+      <DependentUpon>201410032012126_SeedEventsAndVisits.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -26,7 +26,15 @@ namespace Attendance.DataAccess.Migrations
               new Person { FirstName = "Brice Lambson" },
               new Person { FirstName = "Rowan Miller" }
             );
-            
+
+            context.Events.AddOrUpdate(
+                e => e.Name,
+                new Event() { Name = "Conjuring Club" },
+                new Event() { Name = "Computer Club" } 
+            );
+
+            context.Visits.AddOrUpdate(
+                new Visit() { EventId = 01, PersonId = 01, DateTime = DateTime.Now } );
         }
     }
 }
