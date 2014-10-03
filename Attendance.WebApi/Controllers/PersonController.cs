@@ -28,5 +28,16 @@ namespace Attendance.WebApi.Controllers
             }
             return Ok(person);
         }
+
+        // $body = @{ FirstName = "Shaun" } | ConvertTo-JSON
+        // Invoke-RestMethod http://localhost/Attendance.WebApi/api/person -Method POST -ContentType "application/json" -Body $body
+        public HttpResponseMessage PostPerson(Person person)
+        {
+            // see also
+            // http://www.asp.net/web-api/overview/creating-web-apis/using-web-api-1-with-entity-framework-5/using-web-api-with-entity-framework,-part-6
+
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, person);
+            return response;
+        }
     }
 }
