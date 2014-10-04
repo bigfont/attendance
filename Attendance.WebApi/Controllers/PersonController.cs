@@ -12,6 +12,7 @@ namespace Attendance.WebApi.Controllers
 {
     public class PersonController : ApiController
     {
+        // Invoke-RestMethod http://localhost/Attendance.WebApi/api/person -Method GET
         public IEnumerable<PersonDTO> GetAllPersons()
         {
             IEnumerable<PersonDTO> personsDTO;
@@ -28,6 +29,7 @@ namespace Attendance.WebApi.Controllers
             return personsDTO;
         }
 
+        // Invoke-RestMethod http://localhost/Attendance.WebApi/api/person/1 -Method GET
         public IHttpActionResult GetPerson(int id)
         {
             AttendanceContext db = new AttendanceContext();
@@ -63,6 +65,7 @@ namespace Attendance.WebApi.Controllers
             return response;
         }
 
+        // Invoke-RestMethod http://localhost/Attendance.WebApi/api/person/5 -Method DELETE
         public HttpResponseMessage DeletePerson(int id)
         {
             using (AttendanceContext db = new AttendanceContext())
