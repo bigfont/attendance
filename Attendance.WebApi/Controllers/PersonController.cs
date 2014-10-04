@@ -14,13 +14,17 @@ namespace Attendance.WebApi.Controllers
     {
         public IEnumerable<PersonDTO> GetAllPersons()
         {
-            AttendanceContext db = new AttendanceContext();
-            IEnumerable<Person> personsDb = db.Persons;
-            IEnumerable<PersonDTO> personsDTO = db.Persons.Select(p => new PersonDTO { 
-                Id = p.Id,
-                FirstName = p.FirstName, 
-                LastName = p.LastName
-            });
+            IEnumerable<PersonDTO> personsDTO;
+            using (AttendanceContext db = new AttendanceContext())
+            {
+                var personsDb = db.Persons;
+                personsDTO = db.Persons.Select(p => new PersonDTO
+                {
+                    Id = p.Id,
+                    FirstName = p.FirstName,
+                    LastName = p.LastName
+                }).ToList();
+            }
             return personsDTO;
         }
 
@@ -42,11 +46,12 @@ namespace Attendance.WebApi.Controllers
             // see also
             // http://www.asp.net/web-api/overview/creating-web-apis/using-web-api-1-with-entity-framework-5/using-web-api-with-entity-framework,-part-6
 
-            var person = new Person() { 
+            var person = new Person()
+            {
                 Id = personDTO.Id,
-                FirstName = personDTO.FirstName, 
+                FirstName = personDTO.FirstName,
                 LastName = personDTO.LastName
-            };            
+            };
 
             using (AttendanceContext db = new AttendanceContext())
             {
@@ -56,6 +61,18 @@ namespace Attendance.WebApi.Controllers
 
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, person);
             return response;
+        }
+
+        public HttpResponseMessage DeletePerson(int id)
+        {
+            using (AttendanceContext db = new AttendanceContext())
+            {
+                var person = new Person() { Id = id };
+                db.Persons.Attach(person);
+                db.Persons.Remove(person);
+                db.SaveChanges();
+            }
+            return new HttpResponseMessage(HttpStatusCode.OK);
         }
     }
 }
