@@ -34,13 +34,18 @@ namespace Attendance.WebApi.Controllers
         {
             AttendanceContext db = new AttendanceContext();
             var person = db.Persons.FirstOrDefault(p => p.Id == id);
+            var personDTO = new PersonDTO() { 
+                Id = person.Id,
+                FirstName = person.FirstName,
+                LastName = person.LastName
+            };
+
             if (person == null)
             {
                 return NotFound();
             }
-            return Ok(person);
+            return Ok(personDTO);
         }
-
 
         /// $body = @{ FirstName = "Shaun"; LastName = "Luttin" } | ConvertTo-JSON
         /// Invoke-RestMethod http://localhost/Attendance.WebApi/api/person -Method POST -ContentType "application/json" -Body $body -Debug
