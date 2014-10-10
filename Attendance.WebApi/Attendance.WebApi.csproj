@@ -109,6 +109,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\EventController.cs" />
+    <Compile Include="Models\VisitDTO.cs" />
     <Compile Include="Models\EventDTO.cs" />
     <Compile Include="Controllers\VisitController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
