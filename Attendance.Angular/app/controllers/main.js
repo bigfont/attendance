@@ -7,11 +7,6 @@ angular.module('attendance').controller('DatepickerCtrl', function ($scope) {
         $scope.dt = new Date();
     };
     $scope.today();
-
-    // clear dt
-    $scope.clear = function () {
-        $scope.dt = null;
-    };    
     
     $scope.format = 'dd-MMMM-yyyy';
 });
