@@ -1,12 +1,12 @@
-﻿using Attendance.WebApi.Controllers;
-using Attendance.WebApi.Models;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Hosting;
 using System.Linq;
 using System.Threading;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Attendance.WebApi.Controllers;
+using Attendance.WebApi.Models;
 
 namespace Attendance.WebApi.Tests
 {
