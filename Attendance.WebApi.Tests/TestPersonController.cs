@@ -19,7 +19,7 @@ namespace Attendance.WebApi.Tests
         {
             this.controller = new PersonController();
             controller.Request = new System.Net.Http.HttpRequestMessage();
-            controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());        
+            controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
         }
 
         [TestMethod]
@@ -55,11 +55,11 @@ namespace Attendance.WebApi.Tests
             Assert.AreEqual(count, 0);
         }
 
-        private int CreatePersonAndReturnId(PersonDTO personDTO)
-        {            
-            var response = controller.PostPerson(personDTO); // returns HttpResponseMessage
-            personDTO = GetPersonDTOFromResponseMessage(response);
-            return personDTO.Id;
+        private int CreatePersonAndReturnId(PersonDTO dto)
+        {
+            var response = controller.PostPerson(dto); // returns HttpResponseMessage
+            dto = GetPersonDTOFromResponseMessage(response);
+            return dto.Id;
         }
 
         private HttpResponseMessage GetResponseMessageFromActionResult(IHttpActionResult result)
@@ -70,8 +70,9 @@ namespace Attendance.WebApi.Tests
         private PersonDTO GetPersonDTOFromResponseMessage(HttpResponseMessage msg)
         {
             var objContent = msg.Content as ObjectContent;
-            var person = objContent.Value as PersonDTO;
-            return person;
+            var dto = objContent.Value as PersonDTO;
+            return dto;
         }
     }
+
 }
