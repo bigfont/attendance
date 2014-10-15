@@ -67,7 +67,9 @@ namespace Attendance.WebApi.Controllers
                 db.SaveChanges();
             }
 
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, person);
+            personDTO.Id = person.Id;
+
+            HttpResponseMessage response = this.Request.CreateResponse(HttpStatusCode.Created, personDTO);
             return response;
         }
 
