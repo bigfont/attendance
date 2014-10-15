@@ -1,19 +1,17 @@
 ﻿angular.module('attendance', ['ui.bootstrap']);
 
 angular.module('attendance').controller('DatepickerCtrl', function ($scope) {
+
+    // set dt as today's date
     $scope.today = function () {
         $scope.dt = new Date();
     };
     $scope.today();
 
+    // clear dt
     $scope.clear = function () {
         $scope.dt = null;
-    };
-
-    // Disable weekend selection
-    $scope.disabled = function (date, mode) {
-        return (mode === 'day' && (date.getDay() === 0 || date.getDay() === 6));
-    };
+    };    
 
     $scope.toggleMin = function () {
         $scope.minDate = $scope.minDate ? null : new Date();
