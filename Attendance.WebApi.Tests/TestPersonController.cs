@@ -23,7 +23,7 @@ namespace Attendance.WebApi.Tests
         }
 
         [TestMethod]
-        public void TestPostCRUD()
+        public void TestPersonCRUD()
         {
             // create person and test id.
             var id1 = CreatePersonAndReturnId(new PersonDTO() { FirstName = "Shaun", LastName = "Luttin" });
