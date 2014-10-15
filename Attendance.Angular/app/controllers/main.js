@@ -13,11 +13,6 @@ angular.module('attendance').controller('DatepickerCtrl', function ($scope) {
         $scope.dt = null;
     };    
 
-    $scope.toggleMin = function () {
-        $scope.minDate = $scope.minDate ? null : new Date();
-    };
-    $scope.toggleMin();
-
     $scope.open = function ($event) {
         $event.preventDefault();
         $event.stopPropagation();
