@@ -1,5 +1,6 @@
 ﻿angular.module('attendance', ['ui.bootstrap']);
-angular.module('attendance').controller('DatepickerDemoCtrl', function ($scope) {
+
+angular.module('attendance').controller('DatepickerCtrl', function ($scope) {
     $scope.today = function () {
         $scope.dt = new Date();
     };
