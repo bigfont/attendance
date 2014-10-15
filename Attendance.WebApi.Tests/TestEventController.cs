@@ -13,12 +13,12 @@ namespace Attendance.WebApi.Tests
     [TestClass]
     public class TestEventController
     {
-        private EventController controller;
+        internal static EventController Controller;
         public TestEventController()
         {
-            this.controller = new EventController();
-            controller.Request = new System.Net.Http.HttpRequestMessage();
-            controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
+            TestEventController.Controller = new EventController();
+            TestEventController.Controller.Request = new System.Net.Http.HttpRequestMessage();
+            TestEventController.Controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
         }
 
         [TestMethod]
@@ -26,37 +26,37 @@ namespace Attendance.WebApi.Tests
         {
             // create person and test id.
             var id1 = CreateEventAndReturnId(new EventDTO() { Name = "Test Event" });
-            Assert.IsTrue(id1 > 0);
+            Assert.IsTrue(id1 >= 0);
 
             // create person and test id.
             var id2 = CreateEventAndReturnId(new EventDTO() { Name = "Test Event" });
-            Assert.IsTrue(id2 > 0);
+            Assert.IsTrue(id2 >= 0);
 
             // get the first person we created
-            var result = controller.GetEvent(id1); // returns IHttpActionResult
+            var result = TestEventController.Controller.GetEvent(id1); // returns IHttpActionResult
             var message = GetResponseMessageFromActionResult(result);
             var event1Id = GetEventDTOFromResponseMessage(message);
             Assert.IsTrue(id1 == event1Id.Id);
 
             // get both persons we created
-            var enumerable = controller.GetAllEvents();
+            var enumerable = TestEventController.Controller.GetAllEvents();
             var count = enumerable.Where<EventDTO>(p => p.Id == id1 || p.Id == id2).Count();
             Assert.AreEqual(count, 2);
 
             // delete both persons we created
-            controller.DeleteEvent(id1);
-            controller.DeleteEvent(id2);
+            TestEventController.Controller.DeleteEvent(id1);
+            TestEventController.Controller.DeleteEvent(id2);
 
             // make sure they're gone
             // get both persons we created
-            enumerable = controller.GetAllEvents();
+            enumerable = TestEventController.Controller.GetAllEvents();
             count = enumerable.Where<EventDTO>(p => p.Id == id1 || p.Id == id2).Count();
             Assert.AreEqual(count, 0);
         }
 
         private int CreateEventAndReturnId(EventDTO dto)
         {
-            var response = controller.PostEvent(dto); // returns HttpResponseMessage
+            var response = TestEventController.Controller.PostEvent(dto); // returns HttpResponseMessage
             dto = GetEventDTOFromResponseMessage(response);
             return dto.Id;
         }

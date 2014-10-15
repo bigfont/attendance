@@ -33,8 +33,15 @@ namespace Attendance.DataAccess.Migrations
                 new Event() { Name = "Computer Club" } 
             );
 
+            context.SaveChanges();
+
+            var personId = context.Persons.FirstOrDefault().Id;
+            var eventId = context.Events.FirstOrDefault().Id;
+
             context.Visits.AddOrUpdate(
-                new Visit() { EventId = 01, PersonId = 01, DateTime = DateTime.Now } );
+                new Visit() { EventId = eventId, PersonId = personId, DateTime = DateTime.Now } );
+
+            context.SaveChanges();
         }
     }
 }

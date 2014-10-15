@@ -13,13 +13,13 @@ namespace Attendance.WebApi.Tests
     [TestClass]
     public class TestPersonController
     {
-        private PersonController controller;
+        internal static PersonController Controller;
 
-        public TestPersonController()
+        static TestPersonController()
         {
-            this.controller = new PersonController();
-            controller.Request = new System.Net.Http.HttpRequestMessage();
-            controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
+            TestPersonController.Controller = new PersonController();
+            TestPersonController.Controller.Request = new System.Net.Http.HttpRequestMessage();
+            TestPersonController.Controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
         }
 
         [TestMethod]
@@ -27,37 +27,37 @@ namespace Attendance.WebApi.Tests
         {
             // create person and test id.
             var id1 = CreatePersonAndReturnId(new PersonDTO() { FirstName = "Shaun", LastName = "Luttin" });
-            Assert.IsTrue(id1 > 0);
+            Assert.IsTrue(id1 >= 0);
 
             // create person and test id.
             var id2 = CreatePersonAndReturnId(new PersonDTO() { FirstName = "Shaun", LastName = "Luttin" });
-            Assert.IsTrue(id2 > 0);
+            Assert.IsTrue(id2 >= 0);
 
             // get the first person we created
-            var result = controller.GetPerson(id1); // returns IHttpActionResult
+            var result = TestPersonController.Controller.GetPerson(id1); // returns IHttpActionResult
             var message = GetResponseMessageFromActionResult(result);
             var person1 = GetPersonDTOFromResponseMessage(message);
             Assert.IsTrue(id1 == person1.Id);
 
             // get both persons we created
-            var enumerable = controller.GetAllPersons();
+            var enumerable = TestPersonController.Controller.GetAllPersons();
             var count = enumerable.Where<PersonDTO>(p => p.Id == id1 || p.Id == id2).Count();
             Assert.AreEqual(count, 2);
 
             // delete both persons we created
-            controller.DeletePerson(id1);
-            controller.DeletePerson(id2);
+            TestPersonController.Controller.DeletePerson(id1);
+            TestPersonController.Controller.DeletePerson(id2);
 
             // make sure they're gone
             // get both persons we created
-            enumerable = controller.GetAllPersons();
+            enumerable = TestPersonController.Controller.GetAllPersons();
             count = enumerable.Where<PersonDTO>(p => p.Id == id1 || p.Id == id2).Count();
             Assert.AreEqual(count, 0);
         }
 
         private int CreatePersonAndReturnId(PersonDTO dto)
         {
-            var response = controller.PostPerson(dto); // returns HttpResponseMessage
+            var response = TestPersonController.Controller.PostPerson(dto); // returns HttpResponseMessage
             dto = GetPersonDTOFromResponseMessage(response);
             return dto.Id;
         }

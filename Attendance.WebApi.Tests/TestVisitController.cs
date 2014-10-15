@@ -26,8 +26,8 @@ namespace Attendance.WebApi.Tests
         public void TestVisitCRUD()
         {
             // create a person and an event
-            var personController = new PersonController();
-            var eventController = new EventController();
+            var personController = TestPersonController.Controller;
+            var eventController = TestEventController.Controller;
 
             var personResponseMessage = personController.PostPerson(new PersonDTO() { FirstName = "FirstName", LastName = "LastName" });
             var tempPerson = TestPersonController.GetPersonDTOFromResponseMessage(personResponseMessage);
@@ -37,7 +37,7 @@ namespace Attendance.WebApi.Tests
 
             // create visit
             var id1 = CreateVisitAndReturnId(new VisitDTO() { PersonId = tempPerson.Id, EventId = tempEvent.Id, DateTime = DateTime.Now });
-            Assert.IsTrue(id1 > 0);
+            Assert.IsTrue(id1 >= 0);
 
             //// create person and test id.
             //var id2 = CreateVisitAndReturnId(new PersonDTO() { FirstName = "Shaun", LastName = "Luttin" });

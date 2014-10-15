@@ -38,7 +38,7 @@ namespace Attendance.WebApi.Controllers
 
             visitDTO.Id = visit.Id;
 
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, visit);
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, visitDTO);
             return response;
         }
 
