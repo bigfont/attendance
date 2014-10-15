@@ -12,12 +12,6 @@ angular.module('attendance').controller('DatepickerCtrl', function ($scope) {
     $scope.clear = function () {
         $scope.dt = null;
     };    
-
-    $scope.dateOptions = {
-        formatYear: 'yy',
-        startingDay: 1
-    };
-
-    $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-    $scope.format = $scope.formats[0];
+    
+    $scope.format = 'dd-MMMM-yyyy';
 });
