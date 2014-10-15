@@ -82,6 +82,8 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TestEventController.cs" />
+    <Compile Include="TestVisitController.cs" />
     <Compile Include="TestPersonController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

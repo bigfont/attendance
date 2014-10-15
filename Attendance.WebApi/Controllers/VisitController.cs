@@ -36,6 +36,8 @@ namespace Attendance.WebApi.Controllers
                 db.SaveChanges();
             }
 
+            visitDTO.Id = visit.Id;
+
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, visit);
             return response;
         }
@@ -46,7 +48,7 @@ namespace Attendance.WebApi.Controllers
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
 
-        public var GetAllVisits()
+        public void GetAllVisits()
         {
             throw new NotImplementedException();
         }
