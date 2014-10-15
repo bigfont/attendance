@@ -8,6 +8,7 @@
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{C20FB05F-294C-4C05-A3EE-5A7613F58C0A}</ProjectGuid>
+    <ProjectGuid>{AD29DD20-3E94-4806-9394-834F2789992F}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -86,6 +87,7 @@
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>16546</DevelopmentServerPort>
+          <DevelopmentServerPort>19124</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:16546/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

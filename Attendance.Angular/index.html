@@ -1,35 +1,62 @@
 ﻿<!DOCTYPE html>
-<html ng-app>
+<html ng-app="attendance">
 <head>
     <title>Attendance</title>
-
-    <link type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" />
+    <!--The javascript-->
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.2.js"></script>
+    <script src="app/controllers/main.js"></script>
+    <!--The css-->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <div class="container">
-        <h1>Attendance</h1>
-
-        <form>
-            <div class="form-group">
-                <label>Choose Event:</label>
-                <select class="form-control">
-                    <option>Conjuring Club</option>
-                    <option>Computer Club</option>
-                </select>
+        <div class="row">
+            <div class="col-md-9">
+                <div class="page-header">
+                    <h1>Attendance</h1>
+                </div>
+                <form role="form">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Choose Event:</label>
+                                <div ng-controller="EventCtrl">
+                                    <select class="form-control">
+                                        <option ng-repeat="event in events">{{ event.Name }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Choose Persons:</label>
+                                <div ng-controller="PersonCtrl">
+                                    <div ng-repeat="person in persons" class="checkbox">
+                                        <label>
+                                            <input type="checkbox" />
+                                            {{ person.FirstName }}
+                                        </label>
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Choose Date:</label>
+                                <div ng-controller="DatepickerCtrl">
+                                    <pre>Selected date is: <em>{{dt | date:'fullDate' }}</em></pre>
+                                    <div>
+                                        <datepicker ng-model="dt" show-weeks="false" class="well well-sm"></datepicker>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <a href="#" class="btn btn-primary">Save</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label>Choose Persons:</label>
-                <select class="form-control" multiple>
-                    <option>Noah</option>
-                    <option>Angjali</option>
-                    <option>Jayson</option>
-                    <option>Marley</option>
-                    <option>Jenn</option>
-                </select>
-            </div>
-        </form>
-
+        </div>
     </div>
 </body>
 </html>
