@@ -7,6 +7,7 @@ namespace Attendance.DataAccess.Models
 {
     public class Visit
     {
+        public int Id { get; set; }
         public int PersonId { get; set; }
         public int EventId { get; set; }
         public DateTime DateTime { get; set; }
