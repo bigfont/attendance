@@ -13,6 +13,7 @@ namespace Attendance.WebApi.Controllers
     public class PersonController : ApiController
     {
         /// Invoke-RestMethod http://localhost/Attendance.WebApi/api/person -Method GET
+        /// Invoke-RestMethod http://attendance1-api.azurewebsites.net/api/person -Method GET        
         public IEnumerable<PersonDTO> GetAllPersons()
         {
             IEnumerable<PersonDTO> personsDTO;
@@ -29,7 +30,7 @@ namespace Attendance.WebApi.Controllers
             return personsDTO;
         }
 
-        /// Invoke-RestMethod http://localhost/Attendance.WebApi/api/person/1 -Method GET
+        /// Invoke-RestMethod http://localhost/Attendance.WebApi/api/person/1 -Method GET        
         public IHttpActionResult GetPerson(int id)
         {
             AttendanceContext db = new AttendanceContext();
@@ -46,9 +47,10 @@ namespace Attendance.WebApi.Controllers
             }
             return Ok(personDTO);
         }
-
+        
         /// $body = @{ FirstName = "Shaun"; LastName = "Luttin" } | ConvertTo-JSON
         /// Invoke-RestMethod http://localhost/Attendance.WebApi/api/person -Method POST -ContentType "application/json" -Body $body -Debug
+        /// Invoke-RestMethod http://attendance1-api.azurewebsites.net/api/person -Method POST -ContentType "application/json" -Body $body -Debug
         public HttpResponseMessage PostPerson(PersonDTO personDTO)
         {
             // see also
