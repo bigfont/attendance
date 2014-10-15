@@ -10,5 +10,6 @@ namespace Attendance.WebApi.Models
         public int EventId { get; set; }
         public int PersonId { get; set; }
         public DateTime DateTime { get; set; }
+        public int Id { get; set; }
     }
 }

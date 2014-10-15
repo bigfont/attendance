@@ -45,5 +45,15 @@ namespace Attendance.WebApi.Controllers
             throw new NotImplementedException();
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
+
+        public var GetAllVisits()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeletePerson(int id1)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
