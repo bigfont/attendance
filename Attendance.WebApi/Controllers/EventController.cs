@@ -68,7 +68,9 @@ namespace Attendance.WebApi.Controllers
                 db.SaveChanges();
             }
 
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, ev);
+            eventDTO.Id = ev.Id;
+
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, eventDTO);
             return response;
         }
 
