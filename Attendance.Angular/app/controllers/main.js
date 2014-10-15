@@ -13,8 +13,23 @@ app.controller('DatepickerCtrl', function ($scope) {
 
 app.controller('PersonCtrl', function ($scope) {
 
+    function initNewPerson()
+    {
+        $scope.newPerson = { First: '', Last: '' };
+    }
+    initNewPerson();
+
+    $scope.add = function () {
+        var newPerson = {
+            FirstName: $scope.newPerson.First, 
+            LastName: $scope.newPerson.Last 
+        };
+        $scope.persons.push(newPerson);
+        initNewPerson();
+    };
+
     $scope.persons = [
-        { FirstName:"Noah" },
+        { FirstName: "Noah" },
         { FirstName: "Marley" },
         { FirstName: "Anjali" },
         { FirstName: "Jaysen" },
