@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace Attendance.WebApi
 {
@@ -12,7 +13,12 @@ namespace Attendance.WebApi
             // Web API configuration and services
 
             // Enable cross site requests
-            config.EnableCors();
+#if DEBUG
+            var cors = new EnableCorsAttribute(origins: "*", headers: "*", methods: "*");
+#else
+            var cors = new EnableCorsAttribute("http://attendance1.azurewebsites.net", headers: "*", methods: "*");
+#endif
+            config.EnableCors(cors);
 
             // Web API routes
             config.MapHttpAttributeRoutes();
