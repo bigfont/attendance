@@ -56,3 +56,9 @@ app.controller('EventCtrl', function ($scope) {
     ];
 
 });
+
+app.controller('VisitCtrl', function ($scope, $http) {
+
+
+
+});
