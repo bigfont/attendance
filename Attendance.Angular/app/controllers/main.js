@@ -13,21 +13,7 @@ app.controller('DatepickerCtrl', function ($scope) {
 
 app.controller('PersonCtrl', function ($scope, $http) {
 
-    var apiBaseUrl = "http://attendance1-api.azurewebsites.net/api";
-
-    function postPerson(person)
-    {
-        var postUrl = apiBaseUrl + '/person';
-        var postData = JSON.stringify(person);
-        $http.post(postUrl, postData)
-            .success(function (data, status, headers, config) { })
-            .error(function (data, status, headers, config) { });
-    }
-
-    function getPersons()
-    {
-        // todo
-    }
+    var personApiUrl = "http://attendance1-api.azurewebsites.net/api/person";
 
     function initNewPerson() {
         $scope.newPerson = { First: '', Last: '' };
@@ -39,7 +25,11 @@ app.controller('PersonCtrl', function ($scope, $http) {
             FirstName: $scope.newPerson.First,
             LastName: $scope.newPerson.Last
         };
-        postPerson(newPerson);
+
+        $http.post(personApiUrl, newPerson)
+            .success(function (data, status, headers, config) { })
+            .error(function (data, status, headers, config) { });
+
         // refresh ui
         $scope.persons.push(newPerson);
         initNewPerson();
@@ -52,6 +42,14 @@ app.controller('PersonCtrl', function ($scope, $http) {
         { FirstName: "Jaysen" },
     ];
 
+    $http.get(personApiUrl)
+        .success(function (data, status, headers, config) {
+            $scope.test = data;
+            console.log('get success');
+        })
+        .error(function (data, status, headers, config) {
+            console.log('get error');
+        });
 });
 
 app.controller('EventCtrl', function ($scope) {
