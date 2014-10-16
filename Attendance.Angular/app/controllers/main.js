@@ -44,12 +44,9 @@ app.controller('PersonCtrl', function ($scope, $http) {
 
     $http.get(personApiUrl)
         .success(function (data, status, headers, config) {
-            $scope.test = data;
-            console.log('get success');
+            $scope.persons = data;
         })
-        .error(function (data, status, headers, config) {
-            console.log('get error');
-        });
+        .error(function (data, status, headers, config) { });
 });
 
 app.controller('EventCtrl', function ($scope) {
