@@ -40,7 +40,7 @@
                                     <label>Choose Persons:</label>                                    
                                     <div class="checkbox" ng-repeat="person in persons">
                                         <label>
-                                            <input type="checkbox" />
+                                            <input type="checkbox" ng-model="person.Id" />
                                             {{ person.FirstName }} {{ person.LastName }}
                                         </label>
                                     </div>
