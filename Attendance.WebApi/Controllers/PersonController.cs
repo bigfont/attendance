@@ -7,9 +7,11 @@ using System.Web.Http;
 using Attendance.DataAccess.Models;
 using Attendance.DataAccess.DAL;
 using Attendance.WebApi.Models;
+using System.Web.Http.Cors;
 
 namespace Attendance.WebApi.Controllers
 {
+    [EnableCors("http://http://attendance1.azurewebsites.net", headers: "*", methods: "*")]
     public class PersonController : ApiController
     {
         /// Invoke-RestMethod http://localhost/Attendance.WebApi/api/person -Method GET
