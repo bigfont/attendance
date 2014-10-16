@@ -27,9 +27,8 @@ app.controller('PersonCtrl', function ($scope, $http) {
         };
 
         $http.post(personApiUrl, newPerson)
-            .success(function (data, status, headers, config) {
-                newPerson = data;
-                $scope.persons.push(newPerson);
+            .success(function (data, status, headers, config) {                
+                $scope.persons.push(data);
                 initNewPerson();
             })
             .error(function (data, status, headers, config) { });
@@ -37,7 +36,7 @@ app.controller('PersonCtrl', function ($scope, $http) {
 
     $http.get(personApiUrl)
         .success(function (data, status, headers, config) {
-            $scope.persons = data;
+            $scope.persons = data;            
         })
         .error(function (data, status, headers, config) { });
 });
