@@ -1,5 +1,5 @@
 ﻿var app = angular.module('attendance', ['ui.bootstrap']);
-
+        
 app.controller('DatepickerCtrl', function ($scope) {
 
     // set dt as today's date
