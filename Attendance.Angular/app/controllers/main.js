@@ -11,7 +11,7 @@ app.controller('DatepickerCtrl', function ($scope) {
     $scope.format = 'dd-MMMM-yyyy';
 });
 
-app.controller('PersonCtrl', function ($scope) {
+app.controller('PersonCtrl', function ($scope, $http) {
 
     function initNewPerson()
     {
@@ -20,10 +20,25 @@ app.controller('PersonCtrl', function ($scope) {
     initNewPerson();
 
     $scope.add = function () {
+
+        // create new person
         var newPerson = {
             FirstName: $scope.newPerson.First, 
             LastName: $scope.newPerson.Last 
         };
+
+        // post new person
+        var postUrl = 'http://attendance1-api.azurewebsites.net/api/person';
+        var postData = JSON.stringify(newPerson);
+        $http({ url: postUrl, data: postData, method:'POST' })
+            .success(function () {
+                window.alert("success");
+            })
+            .error(function (data, status, headers, config) {               
+                window.alert("error");
+            });
+
+        // refresh to ui
         $scope.persons.push(newPerson);
         initNewPerson();
     };
