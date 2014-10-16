@@ -1,5 +1,5 @@
 ﻿var app = angular.module('attendance', ['ui.bootstrap']);
-        
+
 app.controller('DatepickerCtrl', function ($scope) {
 
     // set dt as today's date
@@ -13,7 +13,14 @@ app.controller('DatepickerCtrl', function ($scope) {
 
 app.controller('PersonCtrl', function ($scope, $http) {
 
-    var personApiUrl = "http://attendance1-api.azurewebsites.net/api/person";
+    //#region TODO Set this as a app wide constant or service somewhere
+    var apiBaseUrl = "http://attendance1-api.azurewebsites.net/api";
+    if (window.location.href.indexOf('localhost') >= 0) {
+        var apiBaseUrl = 'http://localhost/attendance.webapi/api'
+    }
+    //#endregion
+
+    var personApiUrl = apiBaseUrl + "/person";
 
     function initNewPerson() {
         $scope.newPerson = { First: '', Last: '', Id: null };
@@ -27,7 +34,7 @@ app.controller('PersonCtrl', function ($scope, $http) {
         };
 
         $http.post(personApiUrl, newPerson)
-            .success(function (data, status, headers, config) {                
+            .success(function (data, status, headers, config) {
                 $scope.persons.push(data);
                 initNewPerson();
             })
@@ -36,7 +43,7 @@ app.controller('PersonCtrl', function ($scope, $http) {
 
     $http.get(personApiUrl)
         .success(function (data, status, headers, config) {
-            $scope.persons = data;            
+            $scope.persons = data;
         })
         .error(function (data, status, headers, config) { });
 });
