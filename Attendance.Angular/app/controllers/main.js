@@ -28,15 +28,11 @@ app.controller('PersonCtrl', function ($scope, $http) {
 
         $http.post(personApiUrl, newPerson)
             .success(function (data, status, headers, config) {
-
                 newPerson = data;
-
+                $scope.persons.push(newPerson);
+                initNewPerson();
             })
             .error(function (data, status, headers, config) { });
-
-        // refresh ui
-        $scope.persons.push(newPerson);
-        initNewPerson();
     };
 
     $http.get(personApiUrl)
