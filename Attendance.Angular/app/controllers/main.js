@@ -35,13 +35,6 @@ app.controller('PersonCtrl', function ($scope, $http) {
         initNewPerson();
     };
 
-    $scope.persons = [
-        { FirstName: "Noah" },
-        { FirstName: "Marley" },
-        { FirstName: "Anjali" },
-        { FirstName: "Jaysen" },
-    ];
-
     $http.get(personApiUrl)
         .success(function (data, status, headers, config) {
             $scope.persons = data;
