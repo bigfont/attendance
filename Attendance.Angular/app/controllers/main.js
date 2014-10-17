@@ -116,21 +116,43 @@
 
         var eventApiUrl = apiBaseUrl + "/event";
 
+        function setSelectedEvent(index) {
+            $scope.$parent.selectedEvent = $scope.$parent.events[index];
+        }
+
+        function initNewEvent() {
+            $scope.newEvent = { Name: '' };
+        }
+        initNewEvent();
+
+        $scope.addEvent = function () {
+            var newEvent = {
+                Name: $scope.newEvent.Name
+            };
+
+            $http.post(eventApiUrl, newEvent)
+                .success(function (data, status, headers, config) {                    
+                    $scope.events.push(data);
+                    setSelectedEvent($scope.events.length - 1);
+                    initNewEvent();
+                })
+                .error(function (data, status, headers, config) { });
+        };
+
+
+
+
+
+
         $http.get(eventApiUrl)
             .success(function (data, status, headers, config) {
                 $scope.$parent.events = data;
-                $scope.$parent.selectedEvent = $scope.$parent.events[0];
+                setSelectedEvent(0);
                 console.log('success');
             })
             .error(function (data, status, headers, config) {
                 console.log('error');
-            });
-
-        //$scope.$parent.events = [
-        //    { Id: 1, Name: "Conjuring Club", Selected: true },
-        //    { Id: 2, Name: "Internet of Things", Selected: false }
-        //];
-
+            });        
     });
 
 }());

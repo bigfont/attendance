@@ -14,7 +14,7 @@ namespace Attendance.DataAccess.DAL
         public AttendanceContext()
             : base("AttendanceContext")
         {
-            Database.SetInitializer(new DropCreateDatabaseAlways<AttendanceContext>());
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<AttendanceContext>());
             Database.Initialize(false);
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

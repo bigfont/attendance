@@ -21,6 +21,13 @@
                         <div class="col-md-6">
                             <div ng-controller="EventCtrl">
                                 <div class="form-group">
+                                    <label>Add new Event:</label>
+                                    <div class="form-inline">
+                                        <input type="text" class="form-control" placeholder="Name." ng-model="newEvent.Name" />
+                                        <a href="#" class="btn btn-primary" ng-click="addEvent()">Add Event</a>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label>Choose Event:</label>
                                     <select class="form-control" ng-model="selectedEvent" ng-options="event.Name for event in events"></select>                                    
                                 </div>
@@ -31,7 +38,7 @@
                                     <div class="form-inline">
                                         <input type="text" class="form-control" placeholder="First name." ng-model="newPerson.First" />
                                         <input type="text" class="form-control" placeholder="Last name." ng-model="newPerson.Last" />
-                                        <a href="#" class="btn btn-primary" ng-click="addPerson()">Add</a>
+                                        <a href="#" class="btn btn-primary" ng-click="addPerson()">Add Person</a>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -56,7 +63,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <a href="#" class="btn btn-primary" ng-click="saveVisits()">Save</a>                                
+                                <a href="#" class="btn btn-primary" ng-click="saveVisits()">Save Attendance</a>
                             </div>
                         </div>
                     </div>
