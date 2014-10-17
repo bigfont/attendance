@@ -139,11 +139,6 @@
                 .error(function (data, status, headers, config) { });
         };
 
-
-
-
-
-
         $http.get(eventApiUrl)
             .success(function (data, status, headers, config) {
                 $scope.$parent.events = data;
