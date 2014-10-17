@@ -1,5 +1,19 @@
 ﻿var app = angular.module('attendance', ['ui.bootstrap']);
 
+app.controller('VisitCtrl', function ($scope, $http) {
+
+    $scope.persons = {}; // PersonCtrl will access this too.
+
+    $scope.saveVisits = function () {
+
+        console.log('saving');
+        console.table($scope.persons); // works in firefox 34
+
+
+    };
+
+});
+
 app.controller('DatepickerCtrl', function ($scope) {
 
     // set dt as today's date
@@ -27,7 +41,7 @@ app.controller('PersonCtrl', function ($scope, $http) {
     }
     initNewPerson();
 
-    $scope.add = function () {
+    $scope.addPerson = function () {
         var newPerson = {
             FirstName: $scope.newPerson.First,
             LastName: $scope.newPerson.Last
@@ -43,7 +57,7 @@ app.controller('PersonCtrl', function ($scope, $http) {
 
     $http.get(personApiUrl)
         .success(function (data, status, headers, config) {
-            $scope.persons = data;
+            $scope.$parent.persons = data;
         })
         .error(function (data, status, headers, config) { });
 });
@@ -54,11 +68,5 @@ app.controller('EventCtrl', function ($scope) {
         { Name: "Conjuring Club" },
         { Name: "Internet of Things" }
     ];
-
-});
-
-app.controller('VisitCtrl', function ($scope, $http) {
-
-
 
 });

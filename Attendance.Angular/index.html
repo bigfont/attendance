@@ -16,7 +16,7 @@
                 <div class="page-header">
                     <h1>Attendance</h1>
                 </div>
-                <div role="form">
+                <div role="form" ng-controller="VisitCtrl">
                     <div class="row">
                         <div class="col-md-6">
                             <div ng-controller="EventCtrl">
@@ -34,7 +34,7 @@
                                     <div class="form-inline">
                                         <input type="text" class="form-control" placeholder="First name." ng-model="newPerson.First" />
                                         <input type="text" class="form-control" placeholder="Last name." ng-model="newPerson.Last" />
-                                        <a href="#" class="btn btn-primary" ng-click="add()">Add</a>
+                                        <a href="#" class="btn btn-primary" ng-click="addPerson()">Add</a>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -59,7 +59,8 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <a href="#" class="btn btn-primary">Save</a>
+                                <a href="#" class="btn btn-primary" ng-click="saveVisits()">Save</a>
+                                <pre>{{ persons | json }}</pre>
                             </div>
                         </div>
                     </div>

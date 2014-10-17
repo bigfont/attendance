@@ -13,6 +13,5 @@ namespace Attendance.DataAccess.Models
         public DateTime DateTime { get; set; }
         public virtual Person Person { get; set; }
         public virtual Event Event { get; set; }
-
     }
 }

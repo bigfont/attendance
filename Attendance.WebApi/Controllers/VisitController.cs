@@ -12,8 +12,8 @@ namespace Attendance.WebApi.Controllers
 {
     public class VisitController : ApiController
     {
-        /// $body = @{ PersonId = "1"; EventId = "1"; DateTime = "" } | ConvertTo-JSON
-        /// Invoke-RestMethod http://localhost/Attendance.WebApi/api/visit -Method POST -ContentType "application/json" -Body $body -Debug
+        /// $body = @( @{ PersonId = "1"; EventId = "1"; DateTime = "2014-01-01" }, @{ PersonId = "2"; EventId = "2"; DateTime = "2014-01-01" } ) | ConvertTo-JSON
+        /// Invoke-RestMethod http://localhost/Attendance.WebApi/api/visits -Method POST -ContentType "application/json" -Body $body -Debug
         /// 
         /// Notes on Sending Dates with REST.
         /// var date = new Date();
@@ -21,25 +21,22 @@ namespace Attendance.WebApi.Controllers
         /// var iso8601 = date.toJSON();
         /// console.log(jsTimestamp); // 1412978008444
         /// console.log(iso8601); // 2014-10-10T21:54:47.453Z
-        public HttpResponseMessage PostVisit(VisitDTO visitDTO)
+        public IHttpActionResult PostVisit(VisitDTO[] visitDTOs)
         {
-            var visit = new Visit()
-            {
-                PersonId = visitDTO.PersonId,
-                EventId = visitDTO.EventId,
-                DateTime = visitDTO.DateTime
-            };
+            var visits = visitDTOs.Select(v => new Visit()
+            {                
+                PersonId = v.PersonId,
+                EventId = v.EventId,
+                DateTime = v.DateTime
+            });
 
             using (AttendanceContext db = new AttendanceContext())
             {
-                db.Visits.Add(visit);
+                db.Visits.AddRange(visits);
                 db.SaveChanges();
             }
 
-            visitDTO.Id = visit.Id;
-
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, visitDTO);
-            return response;
+            return this.Created("string location", visitDTOs);
         }
 
         public HttpResponseMessage DeleteVisit(int id)

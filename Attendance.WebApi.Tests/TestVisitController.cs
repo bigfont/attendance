@@ -25,18 +25,27 @@ namespace Attendance.WebApi.Tests
         [TestMethod]
         public void TestVisitCRUD()
         {
-            // create a person and an event
+            // create two of both person and an event
             var personController = TestPersonController.Controller;
             var eventController = TestEventController.Controller;
 
-            var personResponseMessage = personController.PostPerson(new PersonDTO() { FirstName = "FirstName", LastName = "LastName" });
-            var tempPerson = TestPersonController.GetPersonDTOFromResponseMessage(personResponseMessage);
+            var personResponseMessage1 = personController.PostPerson(new PersonDTO() { FirstName = "FirstName", LastName = "LastName" });
+            var tempPerson1 = TestPersonController.GetPersonDTOFromResponseMessage(personResponseMessage1);
 
-            var eventResponseMessage = eventController.PostEvent(new EventDTO() { Name = "Name" });
-            var tempEvent = TestEventController.GetEventDTOFromResponseMessage(eventResponseMessage);
+            var personResponseMessage2 = personController.PostPerson(new PersonDTO() { FirstName = "FirstName2", LastName = "LastName2" });
+            var tempPerson2 = TestPersonController.GetPersonDTOFromResponseMessage(personResponseMessage2);
+
+            var eventResponseMessage1 = eventController.PostEvent(new EventDTO() { Name = "Name" });
+            var tempEvent1 = TestEventController.GetEventDTOFromResponseMessage(eventResponseMessage1);
+
+            var eventResponseMessage2 = eventController.PostEvent(new EventDTO() { Name = "Name2" });
+            var tempEvent2 = TestEventController.GetEventDTOFromResponseMessage(eventResponseMessage2);
 
             // create visit
-            var id1 = CreateVisitAndReturnId(new VisitDTO() { PersonId = tempPerson.Id, EventId = tempEvent.Id, DateTime = DateTime.Now });
+            var id1 = CreateVisitAndReturnId(new VisitDTO[] {
+                new VisitDTO { PersonId = tempPerson1.Id, EventId = tempEvent1.Id, DateTime = DateTime.Now }
+                ,new VisitDTO { PersonId = tempPerson2.Id, EventId = tempEvent1.Id, DateTime = DateTime.Now }
+            });
             Assert.IsTrue(id1 >= 0);
 
             //// create person and test id.
@@ -65,11 +74,13 @@ namespace Attendance.WebApi.Tests
             //Assert.AreEqual(count, 0);
         }
 
-        private int CreateVisitAndReturnId(VisitDTO dto)
+        private int CreateVisitAndReturnId(VisitDTO[] dto)
         {
-            var response = controller.PostVisit(dto); // returns HttpResponseMessage
-            dto = GetVisitDTOFromResponseMessage(response);
-            return dto.Id;
+            var result = controller.PostVisit(dto);
+            var response = GetResponseMessageFromActionResult(result);
+
+            dto = (response.Content as ObjectContent).Value as VisitDTO[];
+            return dto.First().Id;            
         }
 
         private HttpResponseMessage GetResponseMessageFromActionResult(IHttpActionResult result)

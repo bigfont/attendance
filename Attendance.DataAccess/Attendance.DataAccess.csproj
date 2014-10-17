@@ -90,7 +90,7 @@
     <Content Include="ApplicationInsights.config" />
     <Content Include="..\Attendance.WebApi\ConnectionStrings.config">
       <Link>ConnectionStrings.config</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -108,21 +108,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\AttendanceContext.cs" />
-    <Compile Include="Migrations\201409262205179_InitialCreate.cs" />
-    <Compile Include="Migrations\201409262205179_InitialCreate.Designer.cs">
-      <DependentUpon>201409262205179_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201410032004094_EventAndVisit.cs" />
-    <Compile Include="Migrations\201410032004094_EventAndVisit.Designer.cs">
-      <DependentUpon>201410032004094_EventAndVisit.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201410032012126_SeedEventsAndVisits.cs" />
-    <Compile Include="Migrations\201410032012126_SeedEventsAndVisits.Designer.cs">
-      <DependentUpon>201410032012126_SeedEventsAndVisits.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201410150128047_VisitId.cs" />
-    <Compile Include="Migrations\201410150128047_VisitId.Designer.cs">
-      <DependentUpon>201410150128047_VisitId.cs</DependentUpon>
+    <Compile Include="Migrations\201410170027215_initial.cs" />
+    <Compile Include="Migrations\201410170027215_initial.Designer.cs">
+      <DependentUpon>201410170027215_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Event.cs" />
@@ -131,17 +119,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201409262205179_InitialCreate.resx">
-      <DependentUpon>201409262205179_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201410032004094_EventAndVisit.resx">
-      <DependentUpon>201410032004094_EventAndVisit.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201410032012126_SeedEventsAndVisits.resx">
-      <DependentUpon>201410032012126_SeedEventsAndVisits.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201410150128047_VisitId.resx">
-      <DependentUpon>201410150128047_VisitId.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201410170027215_initial.resx">
+      <DependentUpon>201410170027215_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

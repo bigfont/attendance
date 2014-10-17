@@ -3,7 +3,7 @@ namespace Attendance.DataAccess.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class EventAndVisit : DbMigration
+    public partial class initial : DbMigration
     {
         public override void Up()
         {
@@ -20,15 +20,26 @@ namespace Attendance.DataAccess.Migrations
                 "dbo.Visit",
                 c => new
                     {
+                        Id = c.Int(nullable: false, identity: true),
                         PersonId = c.Int(nullable: false),
                         EventId = c.Int(nullable: false),
                         DateTime = c.DateTime(nullable: false),
                     })
-                .PrimaryKey(t => new { t.PersonId, t.EventId })
+                .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Event", t => t.EventId, cascadeDelete: true)
                 .ForeignKey("dbo.Person", t => t.PersonId, cascadeDelete: true)
                 .Index(t => t.PersonId)
                 .Index(t => t.EventId);
+            
+            CreateTable(
+                "dbo.Person",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        FirstName = c.String(),
+                        LastName = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
             
         }
         
@@ -38,6 +49,7 @@ namespace Attendance.DataAccess.Migrations
             DropForeignKey("dbo.Visit", "EventId", "dbo.Event");
             DropIndex("dbo.Visit", new[] { "EventId" });
             DropIndex("dbo.Visit", new[] { "PersonId" });
+            DropTable("dbo.Person");
             DropTable("dbo.Visit");
             DropTable("dbo.Event");
         }

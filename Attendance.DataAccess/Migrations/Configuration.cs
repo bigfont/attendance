@@ -5,12 +5,13 @@ namespace Attendance.DataAccess.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
     using Attendance.DataAccess.Models;
+    using Attendance.DataAccess.DAL;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Attendance.DataAccess.DAL.AttendanceContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<AttendanceContext>
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = false;            
         }
 
         protected override void Seed(Attendance.DataAccess.DAL.AttendanceContext context)
