@@ -25,7 +25,7 @@
                                     <label>Add new Event:</label>
                                     <div class="form-inline">
                                         <input type="text" class="form-control" placeholder="Name." ng-model="newEvent.Name" />
-                                        <a href="#" class="btn btn-primary" ng-click="addEvent()">Add Event</a>
+                                        <a href="#" class="btn btn-primary" ng-click="postEvent()">Add Event</a>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -37,11 +37,12 @@
                                             <!--Read vs Edit-->
                                             <span ng-show="!event.edit">
                                                 {{ event.Name }}
-                                                <a href="#" ng-click="edit(event)">Edit</a>
+                                                <a href="#" ng-click="event.edit = true">Edit</a>
+                                                <a href="#" ng-click="deleteEvent(event)">Delete</a>
                                             </span>
                                             <span ng-show="event.edit" class="form-inline">
                                                 <input class="form-control" type="text" ng-model="event.Name" />
-                                                <a href="#" ng-click="save(event)">Save</a>
+                                                <a href="#" ng-click="putEvent(event)">Save</a>
                                             </span>
                                         </label>
                                     </div>

@@ -126,29 +126,13 @@
         }
         initNewEvent();
 
-        $scope.edit = function (event)
-        {
-            event.edit = true;
-        }
-
-        $scope.save = function (event)
-        {           
-            $http.put(eventApiUrl, event)
-                .success(function (data, status, headers, config) {
-                    event.edit = false;
-                })
-                .error(function (data, status, headers, config) {
-                    console.log('error');
-                });
-        }
-
-        $scope.addEvent = function () {
+        $scope.postEvent = function () {
             var newEvent = {
                 Name: $scope.newEvent.Name
             };
 
             $http.post(eventApiUrl, newEvent)
-                .success(function (data, status, headers, config) {                    
+                .success(function (data, status, headers, config) {
                     $scope.$parent.events.push(data);
                     setSelectedEvent($scope.events.length - 1);
                     initNewEvent();
@@ -156,10 +140,26 @@
                 .error(function (data, status, headers, config) { });
         };
 
-        $scope.updateEvent = function (event) {
+        $scope.putEvent = function (event) {
+            $http.put(eventApiUrl, event)
+                .success(function (data, status, headers, config) {
+                    event.edit = false;
+                })
+                .error(function (data, status, headers, config) {
+                    console.log('error');
+                });
+        }        
 
-            console.table(event);
-
+        $scope.deleteEvent = function (event)
+        {
+            $http.delete(eventApiUrl + '/' + event.Id)
+                .success(function (data, status, headers, config) {
+                    var index = $scope.events.indexOf(event);
+                    $scope.events.splice(index, 1);
+                })
+                .error(function (data, status, headers, config) {
+                    console.log('error');
+                });
         }
 
         $http.get(eventApiUrl)
@@ -171,7 +171,6 @@
             .error(function (data, status, headers, config) {
                 console.log('error');
             });
-
     });
 
 }());
