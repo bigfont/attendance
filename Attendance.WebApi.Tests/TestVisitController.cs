@@ -47,31 +47,6 @@ namespace Attendance.WebApi.Tests
                 ,new VisitDTO { PersonId = tempPerson2.Id, EventId = tempEvent1.Id, DateTime = DateTime.Now }
             });
             Assert.IsTrue(id1 >= 0);
-
-            //// create person and test id.
-            //var id2 = CreateVisitAndReturnId(new PersonDTO() { FirstName = "Shaun", LastName = "Luttin" });
-            //Assert.IsTrue(id2 > 0);
-
-            //// get the first person we created
-            //var result = controller.GetVisit(id1); // returns IHttpActionResult
-            //var message = GetResponseMessageFromActionResult(result);
-            //var person1 = GetVisitDTOFromResponseMessage(message);
-            //Assert.IsTrue(id1 == person1.Id);
-
-            //// get both persons we created
-            //var enumerable = controller.GetAllVisits();
-            //var count = enumerable.Where<VisitDTO>(p => p.Id == id1 || p.Id == id2).Count();
-            //Assert.AreEqual(count, 2);
-
-            //// delete both persons we created
-            //controller.DeletePerson(id1);
-            //controller.DeletePerson(id2);
-
-            //// make sure they're gone
-            //// get both persons we created
-            //enumerable = controller.GetAllVisits();
-            //count = enumerable.Where<VisitDTO>(p => p.Id == id1 || p.Id == id2).Count();
-            //Assert.AreEqual(count, 0);
         }
 
         private int CreateVisitAndReturnId(VisitDTO[] dto)
