@@ -40,7 +40,7 @@ namespace Attendance.WebApi.Controllers
             {
                 Id = ev.Id,
                 Name = ev.Name
-            };            
+            };
 
             if (ev == null)
             {
@@ -68,10 +68,30 @@ namespace Attendance.WebApi.Controllers
                 db.SaveChanges();
             }
 
-            eventDTO.Id = ev.Id;
+            eventDTO.Id =  ev.Id;
 
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, eventDTO);
             return response;
+        }
+
+        public IHttpActionResult PutEvent(EventDTO eventDTO)
+        {
+            var ev = new Event()
+            {
+                Id = eventDTO.Id,
+                Name = eventDTO.Name
+            };
+
+            using (AttendanceContext db = new AttendanceContext())
+            {
+                db.Events.Attach(ev);
+                var entry = db.Entry(ev);
+                entry.Property(e => e.Name).IsModified = true;
+                // other changed properties
+                db.SaveChanges();
+            }
+
+            return Ok();
         }
 
         /// Invoke-RestMethod http://localhost/Attendance.WebApi/api/event/5 -Method DELETE

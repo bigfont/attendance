@@ -32,15 +32,24 @@
                                     <label>Choose Event:</label>
                                     <div class="radio" ng-repeat="event in events">
                                         <label>
+                                            <!--Checkbox-->
                                             <input type="radio" name="eventsRadio" ng-value="event" ng-model="$parent.selectedEvent" />
-                                            {{ event.Name }}
+                                            <!--Read vs Edit-->
+                                            <span ng-show="!event.edit">
+                                                {{ event.Name }}
+                                                <a href="#" ng-click="edit(event)">Edit</a>
+                                            </span>
+                                            <span ng-show="event.edit" class="form-inline">
+                                                <input class="form-control" type="text" ng-model="event.Name" />
+                                                <a href="#" ng-click="save(event)">Save</a>
+                                            </span>
                                         </label>
-                                    </div>                                    
+                                    </div>
                                 </div>
                             </fieldset>
                         </div>
                         <div class="col-md-4">
-                            <fieldset ng-controller="PersonCtrl">                                
+                            <fieldset ng-controller="PersonCtrl">
                                 <legend>Persons</legend>
                                 <div class="form-group">
                                     <label>Add new Person:</label>
@@ -51,10 +60,10 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Choose Persons:</label>                                    
+                                    <label>Choose Persons:</label>
                                     <div class="checkbox" ng-repeat="person in persons">
                                         <label>
-                                            <input type="checkbox" ng-model="person.Selected"  />
+                                            <input type="checkbox" ng-model="selectedPersons" />
                                             {{ person.FirstName }} {{ person.LastName }}
                                         </label>
                                     </div>

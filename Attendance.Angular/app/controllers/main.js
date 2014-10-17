@@ -20,6 +20,7 @@
         $scope.persons = {};
         $scope.events = {};
         $scope.selectedEvent = {};
+        $scope.selectedPersons = {};
         $scope.visitDateTime = {};
 
         $scope.saveVisits = function () {
@@ -125,6 +126,22 @@
         }
         initNewEvent();
 
+        $scope.edit = function (event)
+        {
+            event.edit = true;
+        }
+
+        $scope.save = function (event)
+        {           
+            $http.put(eventApiUrl, event)
+                .success(function (data, status, headers, config) {
+                    event.edit = false;
+                })
+                .error(function (data, status, headers, config) {
+                    console.log('error');
+                });
+        }
+
         $scope.addEvent = function () {
             var newEvent = {
                 Name: $scope.newEvent.Name
@@ -139,6 +156,12 @@
                 .error(function (data, status, headers, config) { });
         };
 
+        $scope.updateEvent = function (event) {
+
+            console.table(event);
+
+        }
+
         $http.get(eventApiUrl)
             .success(function (data, status, headers, config) {
                 $scope.$parent.events = data;
@@ -147,7 +170,8 @@
             })
             .error(function (data, status, headers, config) {
                 console.log('error');
-            });        
+            });
+
     });
 
 }());
