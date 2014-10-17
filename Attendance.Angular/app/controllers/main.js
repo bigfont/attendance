@@ -12,8 +12,17 @@ app.controller('VisitCtrl', function ($scope, $http) {
 
         var visits = [];
 
+        angular.forEach($scope.persons, function (value, key) {
+            if (value.Selected)
+            {
+                var visit = {
+                    PersonId: value.Id,
+                    EventId: ''
+                };
+                visits.push();
+            }
+        });
 
-        visits.push({});
 
 
     };
@@ -80,5 +89,7 @@ app.controller('EventCtrl', function ($scope) {
         { Name: "Conjuring Club", Selected: true },
         { Name: "Internet of Things", Selected: false }
     ];
+
+    $scope.$parent.selectedEvent = $scope.$parent.events[0];
 
 });
