@@ -1,46 +1,8 @@
-﻿var app = angular.module('attendance', ['ui.bootstrap']);
+﻿(function () {
 
-app.controller('VisitCtrl', function ($scope, $http) {
+    /* use strict */
 
-    $scope.persons = {}; // PersonCtrl will access this too.
-
-    $scope.saveVisits = function () {
-
-        console.log('saving');
-        console.table($scope.persons); // .table works in firefox 34
-        console.table($scope.events);
-
-        var visits = [];
-
-        angular.forEach($scope.persons, function (value, key) {
-            if (value.Selected)
-            {
-                var visit = {
-                    PersonId: value.Id,
-                    EventId: ''
-                };
-                visits.push();
-            }
-        });
-
-
-
-    };
-
-});
-
-app.controller('DatepickerCtrl', function ($scope) {
-
-    // set dt as today's date
-    $scope.today = function () {
-        $scope.dt = new Date();
-    };
-    $scope.today();
-
-    $scope.format = 'dd-MMMM-yyyy';
-});
-
-app.controller('PersonCtrl', function ($scope, $http) {
+    var app = angular.module('attendance', ['ui.bootstrap']);
 
     //#region TODO Set this as a app wide constant or service somewhere
     var apiBaseUrl = "http://attendance1-api.azurewebsites.net/api";
@@ -49,47 +11,126 @@ app.controller('PersonCtrl', function ($scope, $http) {
     }
     //#endregion
 
-    var personApiUrl = apiBaseUrl + "/person";
+    app.controller('VisitCtrl', function ($scope, $http) {
 
-    function initNewPerson() {
-        $scope.newPerson = { First: '', Last: '', Id: null };
-    }
-    initNewPerson();
+        var visitApiUrl = apiBaseUrl + "/visit";
 
-    $scope.addPerson = function () {
-        var newPerson = {
-            FirstName: $scope.newPerson.First,
-            LastName: $scope.newPerson.Last,            
-        };
+        // child controls will populate these 
+        // do we need to instantiate them here?
+        $scope.persons = {};
+        $scope.events = {};
+        $scope.selectedEvent = {};
+        $scope.visitDateTime = {};
 
-        $http.post(personApiUrl, newPerson)
-            .success(function (data, status, headers, config) {
-                data.Selected = true;
-                $scope.persons.push(data);
-                initNewPerson();
-            })
-            .error(function (data, status, headers, config) { });
-    };
+        $scope.saveVisits = function () {
 
-    $http.get(personApiUrl)
-        .success(function (data, status, headers, config) {
+            var visits,
+                selectedEventId,
+                date,
+                jsTimestampe,
+                iso8601Date,
+                selectedDateTime;
 
-            angular.forEach(data, function (value, key) {
-                value.Selected = false;
+            visits = [];
+            selectedEventId = $scope.selectedEvent.Id;                        
+
+            date = new Date($scope.visitDateTime);
+            jsTimestamp = date.getTime();
+            iso8601Date = date.toJSON();
+            selectedDateTime = iso8601Date;
+
+            // iterate persons and add selected ones
+            angular.forEach($scope.persons, function (value, key) {
+                if (value.Selected) {
+                    var visit = {
+                        PersonId: value.Id,
+                        EventId: selectedEventId,
+                        DateTime: selectedDateTime
+                    };
+                    visits.push(visit);
+                }
             });
 
-            $scope.$parent.persons = data;
-        })
-        .error(function (data, status, headers, config) { });
-});
+            console.table(visits);
 
-app.controller('EventCtrl', function ($scope) {
+            $http.post(visitApiUrl, visits)
+                .success(function (data, status, headers, config) {
+                    console.log('success');
+                })
+                .error(function (data, status, headers, config) {
+                    console.table(data);
+                });
 
-    $scope.$parent.events = [
-        { Name: "Conjuring Club", Selected: true },
-        { Name: "Internet of Things", Selected: false }
-    ];
+        };
 
-    $scope.$parent.selectedEvent = $scope.$parent.events[0];
+    });
 
-});
+    app.controller('DatepickerCtrl', function ($scope) {
+
+        // set dt as today's date
+        $scope.today = function () {
+            $scope.$parent.visitDateTime = new Date();
+        };
+        $scope.today();
+        $scope.format = 'dd-MMMM-yyyy';
+
+    });
+
+    app.controller('PersonCtrl', function ($scope, $http) {        
+
+        var personApiUrl = apiBaseUrl + "/person";
+
+        function initNewPerson() {
+            $scope.newPerson = { First: '', Last: '', Id: null };
+        }
+        initNewPerson();
+
+        $scope.addPerson = function () {
+            var newPerson = {
+                FirstName: $scope.newPerson.First,
+                LastName: $scope.newPerson.Last,
+            };
+
+            $http.post(personApiUrl, newPerson)
+                .success(function (data, status, headers, config) {
+                    data.Selected = true;
+                    $scope.persons.push(data);
+                    initNewPerson();
+                })
+                .error(function (data, status, headers, config) { });
+        };
+
+        $http.get(personApiUrl)
+            .success(function (data, status, headers, config) {
+
+                angular.forEach(data, function (value, key) {
+                    value.Selected = false;
+                });
+
+                $scope.$parent.persons = data;
+            })
+            .error(function (data, status, headers, config) { });
+    });
+
+    app.controller('EventCtrl', function ($scope, $http) {
+
+        var eventApiUrl = apiBaseUrl + "/event";
+
+        $http.get(eventApiUrl)
+            .success(function (data, status, headers, config) {
+                $scope.$parent.events = data;
+                $scope.$parent.selectedEvent = $scope.$parent.events[0];
+                console.log('success');
+            })
+            .error(function (data, status, headers, config) {
+                console.log('error');
+            });
+
+        //$scope.$parent.events = [
+        //    { Id: 1, Name: "Conjuring Club", Selected: true },
+        //    { Id: 2, Name: "Internet of Things", Selected: false }
+        //];
+
+    });
+
+}());

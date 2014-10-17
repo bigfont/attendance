@@ -17,6 +17,7 @@
                     <h1>Attendance</h1>
                 </div>
                 <div role="form" ng-controller="VisitCtrl">
+                    <pre>{{ visitDateTime | json }}</pre>
                     <div class="row">
                         <div class="col-md-6">
                             <div ng-controller="EventCtrl">
@@ -38,7 +39,7 @@
                                     <label>Choose Persons:</label>                                    
                                     <div class="checkbox" ng-repeat="person in persons">
                                         <label>
-                                            <input type="checkbox" ng-model="person.Id" ng-checked="person.Selected" />
+                                            <input type="checkbox" ng-model="person.Selected"  />
                                             {{ person.FirstName }} {{ person.LastName }}
                                         </label>
                                     </div>
@@ -49,9 +50,9 @@
                             <div ng-controller="DatepickerCtrl">
                                 <div class="form-group">
                                     <label>Choose Date:</label>
-                                    <pre>Selected date is: <em>{{dt | date:'fullDate' }}</em></pre>
+                                    <pre>Selected date is: <em>{{visitDateTime | date:'fullDate' }}</em></pre>
                                     <div>
-                                        <datepicker ng-model="dt" show-weeks="false" class="well well-sm"></datepicker>
+                                        <datepicker ng-model="visitDateTime" show-weeks="false" class="well well-sm"></datepicker>
                                     </div>
                                 </div>
                             </div>
