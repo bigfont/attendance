@@ -46,7 +46,7 @@
                         PersonId: value.Id,
                         EventId: selectedEventId,
                         DateTime: selectedDateTime
-                    };
+                    };                    
                     visits.push(visit);
                 }
             });
@@ -94,7 +94,7 @@
             $http.post(personApiUrl, newPerson)
                 .success(function (data, status, headers, config) {
                     data.Selected = true;
-                    $scope.persons.push(data);
+                    $scope.$parent.persons.push(data);
                     initNewPerson();
                 })
                 .error(function (data, status, headers, config) { });
@@ -132,7 +132,7 @@
 
             $http.post(eventApiUrl, newEvent)
                 .success(function (data, status, headers, config) {                    
-                    $scope.events.push(data);
+                    $scope.$parent.events.push(data);
                     setSelectedEvent($scope.events.length - 1);
                     initNewEvent();
                 })
