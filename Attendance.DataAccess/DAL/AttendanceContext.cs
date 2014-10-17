@@ -2,6 +2,7 @@
 using System.Data.Entity.ModelConfiguration.Conventions;
 using Attendance.DataAccess.Models;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.Infrastructure.Annotations;
 
 namespace Attendance.DataAccess.DAL
 {
@@ -12,11 +13,13 @@ namespace Attendance.DataAccess.DAL
         public DbSet<Visit> Visits { get; set; }
         public AttendanceContext()
             : base("AttendanceContext")
-        {                     
+        {
+            Database.SetInitializer(new DropCreateDatabaseAlways<AttendanceContext>());
+            Database.Initialize(false);
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();                            
         }        
     }
 }

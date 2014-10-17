@@ -112,6 +112,10 @@
     <Compile Include="Migrations\201410170027215_initial.Designer.cs">
       <DependentUpon>201410170027215_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201410170046565_uniqueIndex.cs" />
+    <Compile Include="Migrations\201410170046565_uniqueIndex.Designer.cs">
+      <DependentUpon>201410170046565_uniqueIndex.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\Person.cs" />
@@ -121,6 +125,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201410170027215_initial.resx">
       <DependentUpon>201410170027215_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410170046565_uniqueIndex.resx">
+      <DependentUpon>201410170046565_uniqueIndex.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
