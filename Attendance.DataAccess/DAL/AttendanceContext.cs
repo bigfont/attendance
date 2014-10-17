@@ -12,14 +12,11 @@ namespace Attendance.DataAccess.DAL
         public DbSet<Visit> Visits { get; set; }
         public AttendanceContext()
             : base("AttendanceContext")
-        { 
-            Database.SetInitializer(new DropCreateDatabaseAlways<AttendanceContext>());
-        
+        {                     
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Conventions                
-                .Remove<PluralizingTableNameConvention>();            
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }        
     }
 }
