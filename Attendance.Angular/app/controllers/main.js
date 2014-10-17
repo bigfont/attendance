@@ -7,7 +7,13 @@ app.controller('VisitCtrl', function ($scope, $http) {
     $scope.saveVisits = function () {
 
         console.log('saving');
-        console.table($scope.persons); // works in firefox 34
+        console.table($scope.persons); // .table works in firefox 34
+        console.table($scope.events);
+
+        var visits = [];
+
+
+        visits.push({});
 
 
     };
@@ -44,11 +50,12 @@ app.controller('PersonCtrl', function ($scope, $http) {
     $scope.addPerson = function () {
         var newPerson = {
             FirstName: $scope.newPerson.First,
-            LastName: $scope.newPerson.Last
+            LastName: $scope.newPerson.Last,            
         };
 
         $http.post(personApiUrl, newPerson)
             .success(function (data, status, headers, config) {
+                data.Selected = true;
                 $scope.persons.push(data);
                 initNewPerson();
             })
@@ -57,6 +64,11 @@ app.controller('PersonCtrl', function ($scope, $http) {
 
     $http.get(personApiUrl)
         .success(function (data, status, headers, config) {
+
+            angular.forEach(data, function (value, key) {
+                value.Selected = false;
+            });
+
             $scope.$parent.persons = data;
         })
         .error(function (data, status, headers, config) { });
@@ -64,9 +76,9 @@ app.controller('PersonCtrl', function ($scope, $http) {
 
 app.controller('EventCtrl', function ($scope) {
 
-    $scope.events = [
-        { Name: "Conjuring Club" },
-        { Name: "Internet of Things" }
+    $scope.$parent.events = [
+        { Name: "Conjuring Club", Selected: true },
+        { Name: "Internet of Things", Selected: false }
     ];
 
 });

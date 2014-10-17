@@ -23,7 +23,7 @@
                                 <div class="form-group">
                                     <label>Choose Event:</label>
                                     <select class="form-control">
-                                        <option ng-repeat="event in events">{{ event.Name }}</option>
+                                        <option ng-repeat="event in events" ng-model="event.Selected">{{ event.Name }}</option>
                                     </select>
                                 </div>
                             </div>
