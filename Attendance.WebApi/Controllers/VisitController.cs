@@ -39,18 +39,17 @@ namespace Attendance.WebApi.Controllers
             return this.Created("string location", visitDTOs);
         }
 
-        public HttpResponseMessage DeleteVisit(int id)
-        {
-            throw new NotImplementedException();
-            return new HttpResponseMessage(HttpStatusCode.OK);
-        }
-
-        public void GetAllVisits()
+        public IHttpActionResult DeleteVisit(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void DeletePerson(int id1)
+        public IHttpActionResult GetAllVisits()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IHttpActionResult DeleteVisit(int id1)
         {
             throw new NotImplementedException();
         }
