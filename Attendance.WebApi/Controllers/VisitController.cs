@@ -48,10 +48,5 @@ namespace Attendance.WebApi.Controllers
         {
             throw new NotImplementedException();
         }
-
-        public IHttpActionResult DeleteVisit(int id1)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

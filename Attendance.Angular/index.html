@@ -35,10 +35,10 @@
                                 <div class="form-group">
                                     <label>Choose Event:</label>
                                     <div class="radio" ng-repeat="event in events">
-                                        <label>
-                                            <!--Checkbox-->
-                                            <input type="radio" name="eventsRadio" ng-value="event" ng-model="$parent.selectedEvent" />
-                                            <!--Read vs Edit-->
+                                        <label>                                            
+                                            <!--We use $parent.$parent.selectEvent, because we need to reach the VisitCtrl scope.
+                                            Since ngRepeat creates its own scope, its parent scope is in the EventCtrl, and its grandparent scope is in the VisitCtrl.-->
+                                            <input type="radio" name="eventsRadio" ng-value="event" ng-model="$parent.$parent.selectedEvent" />
                                             <span ng-show="!event.edit">
                                                 {{ event.Name }}
                                                 <a href="#" ng-click="event.edit = true">Edit</a>
@@ -77,7 +77,7 @@
                                     <label>Choose Persons:</label>
                                     <div class="checkbox" ng-repeat="person in persons">
                                         <label>
-                                            <input type="checkbox" ng-model="selectedPersons" />
+                                            <input type="checkbox" ng-model="person.Selected" />
                                             {{ person.FirstName }} {{ person.LastName }}
                                         </label>
                                     </div>
@@ -93,9 +93,9 @@
                             <fieldset ng-controller="DatepickerCtrl">
                                 <legend>Date</legend>
                                 <div class="form-group">
-                                    <pre><em>{{visitDateTime | date:'fullDate' }}</em></pre>
+                                    <pre><em>{{$parent.visitDateTime | date:'fullDate' }}</em></pre>
                                     <div>
-                                        <datepicker ng-model="visitDateTime" show-weeks="false" class="well well-sm"></datepicker>
+                                        <datepicker ng-model="$parent.visitDateTime" show-weeks="false" class="well well-sm"></datepicker>
                                     </div>
                                 </div>
                             </fieldset>
@@ -110,9 +110,20 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12">                
                 <div class="page-header">
                     <h1>Statistics</h1>
+                </div>
+                <div ng-controller="StatisticsCtrl">
+
+                    <!--<pre>{{ visits | json }}</pre>-->
+
+                    <ul>
+                        <li ng-repeat="v in visits.all">
+                            {{ v.Name }} ~ {{ v.VisitsTotal }} total visits.
+                        </li>
+                    </ul>                    
+
                 </div>
 
             </div>

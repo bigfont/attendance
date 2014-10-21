@@ -33,7 +33,7 @@
                 selectedDateTime;
 
             visits = [];
-            selectedEventId = $scope.selectedEvent.Id;                        
+            selectedEventId = $scope.selectedEvent.Id;
 
             date = new Date($scope.visitDateTime);
             jsTimestamp = date.getTime();
@@ -47,7 +47,7 @@
                         PersonId: value.Id,
                         EventId: selectedEventId,
                         DateTime: selectedDateTime
-                    };                    
+                    };
                     visits.push(visit);
                 }
             });
@@ -77,7 +77,7 @@
 
     });
 
-    app.controller('PersonCtrl', function ($scope, $http) {        
+    app.controller('PersonCtrl', function ($scope, $http) {
 
         var personApiUrl = apiBaseUrl + "/person";
 
@@ -148,10 +148,9 @@
                 .error(function (data, status, headers, config) {
                     console.log('error');
                 });
-        }        
+        }
 
-        $scope.deleteEvent = function (event)
-        {
+        $scope.deleteEvent = function (event) {
             $http.delete(eventApiUrl + '/' + event.Id)
                 .success(function (data, status, headers, config) {
                     var index = $scope.events.indexOf(event);
@@ -171,6 +170,39 @@
             .error(function (data, status, headers, config) {
                 console.log('error');
             });
+    });
+
+    app.controller('StatisticsCtrl', function ($scope, $http) {
+
+        var statisticsApiUrl = apiBaseUrl + "/statistics";
+
+        $scope.visits = {};
+
+        function getAllVisits() {
+
+            $http.get(statisticsApiUrl + '/visits/all')
+                .success(function (data, status, headers, config) {
+                    $scope.visits.all = data;
+                    console.log('success');
+                })
+                .error(function (data, status, headers, config) {
+                    console.log('error');
+                });
+
+        }
+
+        // TODO: $on and $emit only work if the emiting controller is a child of the listening controller
+        // so, we'll need to do this through a shared service instead
+        // see also http://stackoverflow.com/questions/11252780/whats-the-correct-way-to-communicate-between-controllers-in-angularjs
+        $scope.$on("updateStatistics", function (event, args) {
+
+            window.alert('hello');
+            getAllVisits();
+
+        });
+
+        getAllVisits();
+
     });
 
 }());
