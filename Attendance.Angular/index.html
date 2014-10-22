@@ -118,11 +118,11 @@
                 </div>
                 <div ng-controller="StatisticsCtrl">
 
-                    <!--<pre>{{ visits | json }}</pre>-->
+                    <pre>{{ visits | json }}</pre>
 
                     <ul>
                         <li ng-repeat="v in visits.all">
-                            {{ v.Name }} ~ {{ v.VisitsTotal }} total visits.
+                            {{ v.Name }} ~ {{ v.VisitsSinceInception }} total visits.
                         </li>
                     </ul>                    
 

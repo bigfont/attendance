@@ -178,9 +178,10 @@
 
         $scope.visits = {};
 
-        function getAllVisits() {
+        // get the total number of visits for each event over its lifetime
+        function getVisitsSinceInception() {
 
-            $http.get(statisticsApiUrl + '/visits/all')
+            $http.get(statisticsApiUrl + '/visits/inception')
                 .success(function (data, status, headers, config) {
                     $scope.visits.all = data;
                     console.log('success');
@@ -191,17 +192,44 @@
 
         }
 
+        function getVisitsByMonth() {
+            $http.get(statisticsApiUrl + '/visits/month')
+                .success(function (data, status, headers, config) {
+                    $scope.visits.month = data;
+                    console.log('success');
+                })
+                .error(function (data, status, headers, config) {
+                    console.log('error');
+                });
+        }
+
+        function getVisitsComprehensive() {
+            $http.get(statisticsApiUrl + '/visits/comprehensive')
+                .success(function (data, status, headers, config) {
+                    $scope.visits.comprehensive = data;
+                    console.log('success');
+                })
+                .error(function (data, status, headers, config) {
+                    console.log('error');
+                });
+        }
+
         // TODO: $on and $emit only work if the emiting controller is a child of the listening controller
         // so, we'll need to do this through a shared service instead
         // see also http://stackoverflow.com/questions/11252780/whats-the-correct-way-to-communicate-between-controllers-in-angularjs
         $scope.$on("updateStatistics", function (event, args) {
 
             window.alert('hello');
-            getAllVisits();
+            getVisitsSinceInception();
+            getVisitsByMonth();
+            getVisitsComprehensive();
 
         });
 
-        getAllVisits();
+        // TODO: consider making these one network call not two
+        getVisitsSinceInception();
+        getVisitsByMonth();
+        getVisitsComprehensive();
 
     });
 
