@@ -9,6 +9,7 @@
     using Attendance.DataAccess.DAL;
     using Attendance.DataAccess.Models;
     using Attendance.WebApi.Models;
+    using System.Globalization;
 
     public class StatisticsController : ApiController
     {
@@ -38,16 +39,18 @@
         [Route("api/statistics/visits/month")]
         public IHttpActionResult GetVisitsByMonth()
         {
+            DateTimeFormatInfo dateInfo = new DateTimeFormatInfo();
             IEnumerable<EventStatsDTO> stats;
             using (AttendanceContext db = new AttendanceContext())
             {
                 var query = db.Visits
-                    .GroupBy(v => new { v.EventId, v.DateTime.Month }, (k, g) => new { k.EventId, k.Month, Count = g.Count() })
-                    .ToLookup(l => l.EventId, l => new { l.Month, l.Count })
+                    .GroupBy(v => new { v.EventId, EventName = v.Event.Name, v.DateTime.Month }, (k, g) => new { k.EventId, k.EventName, k.Month, Count = g.Count() })
+                    .ToLookup(l => new { l.EventId, l.EventName }, l => new { l.Month, l.Count })
                     .Select(l => new EventStatsDTO()
                     {
-                        Id = l.Key,
-                        VisitsByMonth = l.Select(x => x).ToDictionary(x=> x.Month, x => x.Count)
+                        Id = l.Key.EventId,
+                        Name = l.Key.EventName,
+                        VisitsByMonth = l.Select(x => x).ToDictionary(x => dateInfo.GetMonthName(x.Month), x => x.Count)
                     });
                 stats = query.ToList();
             }

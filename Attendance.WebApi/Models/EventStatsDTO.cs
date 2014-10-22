@@ -10,14 +10,13 @@ namespace Attendance.WebApi.Models
     {
         public EventStatsDTO()
         {
-            VisitsByMonth = new Dictionary<int, int>();
         }
 
         public int Id { get; set; }
 
         public string Name { get; set; }
 
-        public IEnumerable<KeyValuePair<int, int>> VisitsByMonth { get; set; }
+        public IEnumerable<KeyValuePair<string, int>> VisitsByMonth { get; set; }
 
         public int VisitsTotal { get; set; }
     }
