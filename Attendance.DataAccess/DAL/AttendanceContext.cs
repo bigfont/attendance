@@ -14,9 +14,8 @@ namespace Attendance.DataAccess.DAL
         public AttendanceContext()
             : base("AttendanceContext")
         {
-            // when exactly does this run? 
-            // is it per application start? will it run again if we restart the application?
-            Database.SetInitializer(new DropCreateDatabaseAlways<AttendanceContext>());
+            // the initializer runs once every application lifetime
+            Database.SetInitializer(new CreateDatabaseIfNotExists<AttendanceContext>());
             Database.Initialize(false);
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
