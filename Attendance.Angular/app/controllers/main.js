@@ -178,6 +178,21 @@
 
         $scope.visits = {};
 
+        $scope.monthNames = [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December'
+        ];
+
         // get the total number of visits for each event over its lifetime
         function getVisitsSinceInception() {
 

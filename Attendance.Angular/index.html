@@ -37,7 +37,7 @@
                                 <div class="form-group">
                                     <label>Choose Event:</label>
                                     <div class="radio" ng-repeat="event in events">
-                                        <label>                                            
+                                        <label>
                                             <!--We use $parent.$parent.selectEvent, because we need to reach the VisitCtrl scope.
                                             Since ngRepeat creates its own scope, its parent scope is in the EventCtrl, and its grandparent scope is in the VisitCtrl.-->
                                             <input type="radio" name="eventsRadio" ng-value="event" ng-model="$parent.$parent.selectedEvent" />
@@ -112,19 +112,26 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">                
+            <div class="col-md-12">
                 <div class="page-header">
                     <h1>Statistics</h1>
                 </div>
                 <div ng-controller="StatisticsCtrl">
 
-                    <pre>{{ visits | json }}</pre>
-
-                    <ul>
-                        <li ng-repeat="v in visits.all">
-                            {{ v.Name }} ~ {{ v.VisitsSinceInception }} total visits.
-                        </li>
-                    </ul>                    
+                    <table class="table table-bordered table-hover table-condensed">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th ng-repeat="month in monthNames">{{ month.substring(0,3) }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="v in visits.comprehensive">
+                                <td>{{ v.Name }}</td>
+                                <td ng-repeat="month in monthNames">{{ v.VisitsByMonth[month.substring(0,3)] }}</td>                                
+                            </tr>
+                        </tbody>
+                    </table>
 
                 </div>
 

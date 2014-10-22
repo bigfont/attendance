@@ -51,7 +51,6 @@
         [Route("api/statistics/visits/month")]
         public IHttpActionResult GetVisitsByMonth()
         {
-            DateTimeFormatInfo dateInfo = new DateTimeFormatInfo();
             IEnumerable<EventStatsDTO> stats;
             using (AttendanceContext db = new AttendanceContext())
             {
@@ -62,7 +61,7 @@
                     {
                         Id = l.Key.EventId,
                         Name = l.Key.EventName,
-                        VisitsByMonth = l.Select(x => x).ToDictionary(x => dateInfo.GetMonthName(x.Month), x => x.Count)
+                        VisitsByMonth = l.Select(x => x).ToDictionary(x => ConvertMonthNumberIntoAbbreviatedMonthName(x.Month), x => x.Count)
                     });
                 stats = query.ToList();
             }
@@ -80,7 +79,6 @@
         [Route("api/statistics/visits/comprehensive")]
         public IHttpActionResult GetVisitsComprehensive()
         {
-            DateTimeFormatInfo dateInfo = new DateTimeFormatInfo();
             IEnumerable<EventStatsDTO> stats;
             using (AttendanceContext db = new AttendanceContext())
             {
@@ -97,7 +95,7 @@
                         Id = l.Key.EventId,
                         Name = l.Key.EventName,
                         VisitsSinceInception = l.Sum(x => x.Count),
-                        VisitsByMonth = l.Select(x => x).ToDictionary(x => dateInfo.GetMonthName(x.Month), x => x.Count)
+                        VisitsByMonth = l.Select(x => x).ToDictionary(x => ConvertMonthNumberIntoAbbreviatedMonthName(x.Month), x => x.Count)
                     });
                 stats = query.ToList();
             }
@@ -105,6 +103,12 @@
             return this.Ok(stats);
         }
 
-
+        private string ConvertMonthNumberIntoAbbreviatedMonthName(int monthNumber)
+        {
+            DateTimeFormatInfo dateInfo = new DateTimeFormatInfo();
+            var fullName = dateInfo.GetMonthName(monthNumber);
+            var abbrName = fullName.Substring(0, 3);
+            return abbrName;            
+        }
     }
 }
