@@ -83,20 +83,20 @@
             using (AttendanceContext db = new AttendanceContext())
             {
                 var query = db.Visits
-                    // group visits by event and month
                     .GroupBy(
                         v => new { v.EventId, EventName = v.Event.Name, v.DateTime.Month }, // grouping terms
-                        (k, g) => new { k.EventId, k.EventName, k.Month, Count = g.Count() }) // projection
-
-                    .ToLookup(l => new { l.EventId, l.EventName }, l => new { l.Month, l.Count })
-
-                    .Select(l => new EventStatsDTO()
-                    {
-                        Id = l.Key.EventId,
-                        Name = l.Key.EventName,
-                        VisitsSinceInception = l.Sum(x => x.Count),
-                        VisitsByMonth = l.Select(x => x).ToDictionary(x => ConvertMonthNumberIntoAbbreviatedMonthName(x.Month), x => x.Count)
-                    });
+                        (key, group) => new { key.EventId, key.EventName, key.Month, Count = group.Count() }) // projection
+                    .ToLookup(
+                        l => new { l.EventId, l.EventName }, 
+                        l => new { l.Month, l.Count })
+                    .Select(
+                        l => new EventStatsDTO()
+                            {
+                                Id = l.Key.EventId,
+                                Name = l.Key.EventName,
+                                VisitsSinceInception = l.Sum(x => x.Count),
+                                VisitsByMonth = l.Select(x => x).ToDictionary(x => ConvertMonthNumberIntoAbbreviatedMonthName(x.Month), x => x.Count)
+                            });
                 stats = query.ToList();
             }
 
