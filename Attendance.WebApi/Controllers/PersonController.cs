@@ -76,6 +76,28 @@ namespace Attendance.WebApi.Controllers
             return response;
         }
 
+        public IHttpActionResult PutPerson(PersonDTO personDTO)
+        {
+            var person = new Person()
+            {
+                Id = personDTO.Id,
+                FirstName = personDTO.FirstName, 
+                LastName = personDTO.LastName
+            };
+
+            using (AttendanceContext db = new AttendanceContext())
+            {
+                db.Persons.Attach(person);
+                var entry = db.Entry(person);
+                entry.Property(p => p.FirstName).IsModified = true;
+                entry.Property(p => p.LastName).IsModified = true;
+                // other changed properties
+                db.SaveChanges();
+            }
+
+            return Ok();
+        }
+
         /// Invoke-RestMethod http://localhost/Attendance.WebApi/api/person/5 -Method DELETE
         public HttpResponseMessage DeletePerson(int id)
         {

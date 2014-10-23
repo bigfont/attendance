@@ -87,7 +87,7 @@
         }
         initNewPerson();
 
-        $scope.addPerson = function () {
+        $scope.postPerson = function () {
             var newPerson = {
                 FirstName: $scope.newPerson.First,
                 LastName: $scope.newPerson.Last,
@@ -101,6 +101,17 @@
                 })
                 .error(function (data, status, headers, config) { });
         };
+
+        $scope.putPerson = function (person) {
+            $http.put(personApiUrl, person)
+                .success(function (data, status, headers, config) {
+                    person.edit = false;
+                })
+                .error(function (data, status, headers, config) {
+                    console.log('error');
+                });
+        }
+
 
         $http.get(personApiUrl)
             .success(function (data, status, headers, config) {
