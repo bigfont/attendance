@@ -11,7 +11,7 @@
     }
     //#endregion
 
-    app.controller('VisitCtrl', function ($scope, $http) {
+    app.controller('VisitCtrl', ['$scope', '$http', function ($scope, $http) {
 
         var visitApiUrl = apiBaseUrl + "/visit";
 
@@ -65,9 +65,9 @@
 
         };
 
-    });
+    }]);
 
-    app.controller('DatepickerCtrl', function ($scope) {
+    app.controller('DatepickerCtrl', ['$scope', function ($scope) {
 
         // set dt as today's date
         $scope.today = function () {
@@ -76,9 +76,9 @@
         $scope.today();
         $scope.format = 'dd-MMMM-yyyy';
 
-    });
+    }]);
 
-    app.controller('PersonCtrl', function ($scope, $http) {
+    app.controller('PersonCtrl', ['$scope', '$http', function ($scope, $http) {
 
         var personApiUrl = apiBaseUrl + "/person";
 
@@ -134,9 +134,9 @@
                 $scope.$parent.persons = data;
             })
             .error(function (data, status, headers, config) { });
-    });
+    }]);
 
-    app.controller('EventCtrl', function ($scope, $http) {
+    app.controller('EventCtrl', ['$scope', '$http', function ($scope, $http) {
 
         var eventApiUrl = apiBaseUrl + "/event";
 
@@ -193,9 +193,9 @@
             .error(function (data, status, headers, config) {
                 console.log('error');
             });
-    });
+    }]);
 
-    app.controller('StatisticsCtrl', function ($scope, $http) {
+    app.controller('StatisticsCtrl', ['$scope', '$http', function ($scope, $http) {
 
         var statisticsApiUrl = apiBaseUrl + "/statistics";
 
@@ -269,6 +269,6 @@
         getVisitsByMonth();
         getVisitsComprehensive();
 
-    });
+    }]);
 
 }());
