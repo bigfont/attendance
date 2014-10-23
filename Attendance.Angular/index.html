@@ -17,8 +17,8 @@
             padding-left: 20px;
         }
 
-        fieldset {
-            margin-bottom:20px;        
+        fieldset, .form-inline {
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -36,27 +36,24 @@
 
                             <div ng-controller="EventCtrl">
 
-                                <fieldset class="form-inline">
-                                    <legend>Add New Event</legend>
+                                <fieldset>
+                                    <legend>Choose Event</legend>
 
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Name." ng-model="newEvent.Name" />
+                                            <input type="text" class="form-control input-sm" placeholder="Name." ng-model="newEvent.Name" />
                                             <div class="input-group-btn">
-                                                <a href="" class="btn btn-primary" ng-click="postEvent()">Add Event</a>
+                                                <a href="" class="btn btn-primary btn-sm" ng-click="postEvent()">Add Event</a>
                                             </div>
                                         </div>
                                     </div>
 
-                                </fieldset>
-                                <fieldset>
-                                    <legend>Choose Event</legend>
                                     <div class="radio" ng-repeat="event in events">
                                         <label>
                                             <!--We use $parent.$parent.selectEvent,
-                                                because we need to reach the VisitCtrl scope.
-                                                Since ngRepeat creates its own scope,
-                                                its parent scope is in the EventCtrl, and its grandparent scope is in the VisitCtrl.-->
+                                            because we need to reach the VisitCtrl scope.
+                                            Since ngRepeat creates its own scope,
+                                            its parent scope is in the EventCtrl, and its grandparent scope is in the VisitCtrl.-->
                                             <input type="radio" name="eventsRadio" ng-value="event" ng-model="$parent.$parent.selectedEvent" />
                                             <span ng-show="!event.edit">
                                                 {{ event.Name }}
@@ -69,35 +66,43 @@
                                             </span>
                                         </label>
                                     </div>
-
                                 </fieldset>
-
 
                             </div>
 
-
                         </div>
+
+
 
                         <div class="col-md-6">
                             <div ng-controller="PersonCtrl">
 
-                                <fieldset class="form-inline">
-                                    <legend>Add New Person</legend>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="First name." ng-model="newPerson.First" />
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Last name." ng-model="newPerson.Last" />
-                                    </div>
-                                    <div class="form-group">
-                                        <a href="" class="btn btn-primary" ng-click="postPerson()">Add Person</a>
-                                    </div>
-                                </fieldset>
+
 
                                 <fieldset>
                                     <legend>Choose Persons</legend>
-                                    <a href="" ng-click="predicate = 'FirstName'; reverse=!reverse">FirstName</a> |
-                                    <a href="" ng-click="predicate = 'LastName'; reverse=!reverse">LastName</a>
+
+                                    <div class="form-inline">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control input-sm" placeholder="First name." ng-model="newPerson.First" />
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control input-sm" placeholder="Last name." ng-model="newPerson.Last" />
+                                        </div>
+                                        <div class="form-group">
+                                            <a href="" class="btn btn-primary btn-sm" ng-click="postPerson()">Add Person</a>
+                                        </div>
+                                    </div>
+
+
+                                    <div>
+
+                                        <a href="" ng-click="predicate = 'FirstName'; reverse=!reverse">FirstName</a> |
+                                        <a href="" ng-click="predicate = 'LastName'; reverse=!reverse">LastName</a>
+
+                                    </div>
+
+
                                     <div class="checkbox" ng-repeat="person in persons | orderBy:predicate:reverse">
                                         <label>
                                             <input type="checkbox" ng-model="person.Selected" />
