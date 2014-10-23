@@ -75,6 +75,7 @@
   <ItemGroup>
     <Content Include="app\controllers\main.js" />
     <Content Include="index.html" />
+    <Content Include="robots.txt" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
