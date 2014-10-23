@@ -14,9 +14,8 @@
     <style>
         /*inline small css form performance*/
         .checkbox > p {
-            padding-left:20px;
+            padding-left: 20px;
         }
-
     </style>
 </head>
 <body>
@@ -68,22 +67,24 @@
 
                         <div class="col-md-3">
 
-                            <fieldset ng-controller="PersonCtrl">
-                                <legend>Persons</legend>
-
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="First name." ng-model="newPerson.First" />
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Last name." ng-model="newPerson.Last" />
-                                </div>
-                                <div class="form-group">
-                                    <a href="" class="btn btn-primary" ng-click="postPerson()">Add Person</a>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Choose Persons:</label>
-                                    <div class="checkbox" ng-repeat="person in persons">
+                            <div ng-controller="PersonCtrl">
+                                <fieldset>
+                                    <legend>Persons</legend>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="First name." ng-model="newPerson.First" />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Last name." ng-model="newPerson.Last" />
+                                    </div>
+                                    <div class="form-group">
+                                        <a href="" class="btn btn-primary" ng-click="postPerson()">Add Person</a>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <legend>Choose Persons</legend>
+                                    <a href="" ng-click="predicate = 'FirstName'; reverse=!reverse">FirstName</a> |
+                                    <a href="" ng-click="predicate = 'LastName'; reverse=!reverse">LastName</a>
+                                    <div class="checkbox" ng-repeat="person in persons | orderBy:predicate:reverse">
                                         <label>
                                             <input type="checkbox" ng-model="person.Selected" />
                                             <span ng-show="!person.edit">
@@ -98,11 +99,8 @@
                                             <a href="" ng-click="putPerson(person)">Save</a>
                                         </p>
                                     </div>
-                                </div>
-
-
-                            </fieldset>
-
+                                </fieldset>
+                            </div>
                         </div>
 
                         <div class="col-md-3">
