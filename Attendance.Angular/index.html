@@ -16,6 +16,10 @@
         .checkbox > p {
             padding-left: 20px;
         }
+
+        fieldset.form-inline {
+            margin-bottom:20px;        
+        }
     </style>
 </head>
 <body>
@@ -30,23 +34,29 @@
                     <div class="row">
                         <div class="col-md-3">
 
-                            <fieldset ng-controller="EventCtrl">
-                                <legend>Event</legend>
+                            <div ng-controller="EventCtrl">
 
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Name." ng-model="newEvent.Name" />
-                                </div>
+                                <fieldset class="form-inline">
+                                    <legend>Event</legend>
 
-                                <div class="form-group">
-                                    <a href="" class="btn btn-primary" ng-click="postEvent()">Add Event</a>
-                                </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="Name." ng-model="newEvent.Name" />
+                                            <div class="input-group-btn">
+                                                <a href="" class="btn btn-primary" ng-click="postEvent()">Add Event</a>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                <div class="form-group">
-                                    <label>Choose Event:</label>
+                                </fieldset>
+                                <fieldset>
+                                    <legend>Choose Event</legend>
                                     <div class="radio" ng-repeat="event in events">
                                         <label>
-                                            <!--We use $parent.$parent.selectEvent, because we need to reach the VisitCtrl scope.
-                                            Since ngRepeat creates its own scope, its parent scope is in the EventCtrl, and its grandparent scope is in the VisitCtrl.-->
+                                            <!--We use $parent.$parent.selectEvent,
+                                                because we need to reach the VisitCtrl scope.
+                                                Since ngRepeat creates its own scope,
+                                                its parent scope is in the EventCtrl, and its grandparent scope is in the VisitCtrl.-->
                                             <input type="radio" name="eventsRadio" ng-value="event" ng-model="$parent.$parent.selectedEvent" />
                                             <span ng-show="!event.edit">
                                                 {{ event.Name }}
@@ -59,16 +69,19 @@
                                             </span>
                                         </label>
                                     </div>
-                                </div>
 
-                            </fieldset>
+                                </fieldset>
+
+
+                            </div>
+
 
                         </div>
 
-                        <div class="col-md-3">
-
+                        <div class="col-md-5">
                             <div ng-controller="PersonCtrl">
-                                <fieldset>
+
+                                <fieldset class="form-inline">
                                     <legend>Persons</legend>
                                     <div class="form-group">
                                         <input type="text" class="form-control" placeholder="First name." ng-model="newPerson.First" />
@@ -80,6 +93,7 @@
                                         <a href="" class="btn btn-primary" ng-click="postPerson()">Add Person</a>
                                     </div>
                                 </fieldset>
+
                                 <fieldset>
                                     <legend>Choose Persons</legend>
                                     <a href="" ng-click="predicate = 'FirstName'; reverse=!reverse">FirstName</a> |
@@ -100,26 +114,33 @@
                                         </p>
                                     </div>
                                 </fieldset>
+
                             </div>
                         </div>
 
-                        <div class="col-md-3">
+                        <div class="col-md-4">
 
-                            <fieldset ng-controller="DatepickerCtrl">
-                                <legend>Date</legend>
-                                <div class="form-group">
-                                    <pre><em>{{$parent.visitDateTime | date:'fullDate' }}</em></pre>
-                                    <div>
-                                        <datepicker ng-model="$parent.visitDateTime" show-weeks="false" class="well well-sm"></datepicker>
+                            <div ng-controller="DatepickerCtrl">
+
+                                <fieldset>
+                                    <legend>Date</legend>
+                                    <div class="form-group">
+                                        <pre><em>{{$parent.visitDateTime | date:'fullDate' }}</em></pre>
+                                        <div>
+                                            <datepicker ng-model="$parent.visitDateTime" show-weeks="false" class="well well-sm"></datepicker>
+                                        </div>
                                     </div>
-                                </div>
-                            </fieldset>
+                                </fieldset>
+
+                            </div>
 
                             <div class="form-group pull-right">
                                 <a href="" class="btn btn-primary" ng-click="saveVisits()">Save Attendance</a>
                             </div>
 
                         </div>
+
+                    </div>
 
                 </form>
             </div>
