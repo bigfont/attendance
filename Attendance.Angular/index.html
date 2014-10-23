@@ -39,7 +39,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <a href="#" class="btn btn-primary" ng-click="postEvent()">Add Event</a>
+                                    <a href="" class="btn btn-primary" ng-click="postEvent()">Add Event</a>
                                 </div>
 
                                 <div class="form-group">
@@ -51,12 +51,12 @@
                                             <input type="radio" name="eventsRadio" ng-value="event" ng-model="$parent.$parent.selectedEvent" />
                                             <span ng-show="!event.edit">
                                                 {{ event.Name }}
-                                                <a href="#" ng-click="event.edit = true">Edit</a>
-                                                <a href="#" ng-click="deleteEvent(event)">Delete</a>
+                                                <a href="" ng-click="event.edit = true">Edit</a>
+                                                <a href="" ng-click="deleteEvent(event)">Delete</a>
                                             </span>
                                             <span ng-show="event.edit" class="form-inline">
                                                 <input class="form-control" type="text" ng-model="event.Name" />
-                                                <a href="#" ng-click="putEvent(event)">Save</a>
+                                                <a href="" ng-click="putEvent(event)">Save</a>
                                             </span>
                                         </label>
                                     </div>
@@ -78,7 +78,7 @@
                                     <input type="text" class="form-control" placeholder="Last name." ng-model="newPerson.Last" />
                                 </div>
                                 <div class="form-group">
-                                    <a href="#" class="btn btn-primary" ng-click="postPerson()">Add Person</a>
+                                    <a href="" class="btn btn-primary" ng-click="postPerson()">Add Person</a>
                                 </div>
 
                                 <div class="form-group">
@@ -88,14 +88,14 @@
                                             <input type="checkbox" ng-model="person.Selected" />
                                             <span ng-show="!person.edit">
                                                 {{ person.FirstName }} {{ person.LastName }}
-                                                <a href="#" ng-click="person.edit = true">Edit</a>
-                                                <a href="#" ng-click="deletePerson(person)">Delete</a>
+                                                <a href="" ng-click="person.edit = true">Edit</a>
+                                                <a href="" ng-click="deletePerson(person)">Delete</a>
                                             </span>
                                         </label>
                                         <p ng-show="person.edit" class="form-inline">
                                             <input class="form-control" type="text" ng-model="person.FirstName" />
                                             <input class="form-control" type="text" ng-model="person.LastName" />
-                                            <a href="#" ng-click="putPerson(person)">Save</a>
+                                            <a href="" ng-click="putPerson(person)">Save</a>
                                         </p>
                                     </div>
                                 </div>
@@ -118,7 +118,7 @@
                             </fieldset>
 
                             <div class="form-group pull-right">
-                                <a href="#" class="btn btn-primary" ng-click="saveVisits()">Save Attendance</a>
+                                <a href="" class="btn btn-primary" ng-click="saveVisits()">Save Attendance</a>
                             </div>
 
                         </div>
