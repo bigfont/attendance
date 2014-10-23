@@ -20,6 +20,15 @@
         fieldset, .form-inline {
             margin-bottom: 20px;
         }
+
+        .scroll {        
+            overflow:auto;        
+        }
+
+        .scroll-vertical {
+            overflow-x:visible;
+            max-height:200px;
+        }
     </style>
 </head>
 <body>
@@ -102,21 +111,24 @@
 
                                     </div>
 
+                                    <div class="scroll scroll-vertical">
 
-                                    <div class="checkbox" ng-repeat="person in persons | orderBy:predicate:reverse">
-                                        <label>
-                                            <input type="checkbox" ng-model="person.Selected" />
-                                            <span ng-show="!person.edit">
-                                                {{ person.FirstName }} {{ person.LastName }}
-                                                <a href="" ng-click="person.edit = true">Edit</a>
-                                                <a href="" ng-click="deletePerson(person)">Delete</a>
-                                            </span>
-                                        </label>
-                                        <p ng-show="person.edit" class="form-inline">
-                                            <input class="form-control" type="text" ng-model="person.FirstName" />
-                                            <input class="form-control" type="text" ng-model="person.LastName" />
-                                            <a href="" ng-click="putPerson(person)">Save</a>
-                                        </p>
+                                        <div class="checkbox" ng-repeat="person in persons | orderBy:predicate:reverse">
+                                            <label>
+                                                <input type="checkbox" ng-model="person.Selected" />
+                                                <span ng-show="!person.edit">
+                                                    {{ person.FirstName }} {{ person.LastName }}
+                                                    <a href="" ng-click="person.edit = true">Edit</a>
+                                                    <a href="" ng-click="deletePerson(person)">Delete</a>
+                                                </span>
+                                            </label>
+                                            <p ng-show="person.edit" class="form-inline">
+                                                <input class="form-control" type="text" ng-model="person.FirstName" />
+                                                <input class="form-control" type="text" ng-model="person.LastName" />
+                                                <a href="" ng-click="putPerson(person)">Save</a>
+                                            </p>
+                                        </div>
+
                                     </div>
                                 </fieldset>
 
