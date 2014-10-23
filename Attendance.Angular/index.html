@@ -57,24 +57,29 @@
                                         </div>
                                     </div>
 
-                                    <div class="radio" ng-repeat="event in events">
-                                        <label>
-                                            <!--We use $parent.$parent.selectEvent,
-                                            because we need to reach the VisitCtrl scope.
-                                            Since ngRepeat creates its own scope,
-                                            its parent scope is in the EventCtrl, and its grandparent scope is in the VisitCtrl.-->
-                                            <input type="radio" name="eventsRadio" ng-value="event" ng-model="$parent.$parent.selectedEvent" />
-                                            <span ng-show="!event.edit">
-                                                {{ event.Name }}
-                                                <a href="" ng-click="event.edit = true">Edit</a>
-                                                <a href="" ng-click="deleteEvent(event)">Delete</a>
-                                            </span>
-                                            <span ng-show="event.edit" class="form-inline">
-                                                <input class="form-control" type="text" ng-model="event.Name" />
-                                                <a href="" ng-click="putEvent(event)">Save</a>
-                                            </span>
-                                        </label>
+                                    <div class="well well-sm">
+
+                                        <div class="radio" ng-repeat="event in events">
+                                            <label>
+                                                <!--We use $parent.$parent.selectEvent,
+                because we need to reach the VisitCtrl scope.
+                Since ngRepeat creates its own scope,
+                its parent scope is in the EventCtrl, and its grandparent scope is in the VisitCtrl.-->
+                                                <input type="radio" name="eventsRadio" ng-value="event" ng-model="$parent.$parent.selectedEvent" />
+                                                <span ng-show="!event.edit">
+                                                    {{ event.Name }}
+                                                    <a href="" ng-click="event.edit = true">Edit</a>
+                                                    <a href="" ng-click="deleteEvent(event)">Delete</a>
+                                                </span>
+                                                <span ng-show="event.edit" class="form-inline">
+                                                    <input class="form-control" type="text" ng-model="event.Name" />
+                                                    <a href="" ng-click="putEvent(event)">Save</a>
+                                                </span>
+                                            </label>
+                                        </div>
+
                                     </div>
+
                                 </fieldset>
 
                             </div>
@@ -85,8 +90,6 @@
 
                         <div class="col-md-6">
                             <div ng-controller="PersonCtrl">
-
-
 
                                 <fieldset>
                                     <legend>Choose Persons</legend>
@@ -103,15 +106,14 @@
                                         </div>
                                     </div>
 
-
-                                    <div>
+                                    <div class="form-group">
 
                                         <a href="" ng-click="predicate = 'FirstName'; reverse=!reverse">FirstName</a> |
                                         <a href="" ng-click="predicate = 'LastName'; reverse=!reverse">LastName</a>
 
                                     </div>
 
-                                    <div class="scroll scroll-vertical">
+                                    <div class="well well-sm scroll scroll-vertical">
 
                                         <div class="checkbox" ng-repeat="person in persons | orderBy:predicate:reverse">
                                             <label>
