@@ -112,6 +112,17 @@
                 });
         }
 
+        $scope.deletePerson = function (person) {
+            $http.delete(personApiUrl + '/' + person.Id)
+                .success(function (data, status, headers, config) {
+                    var index = $scope.$parent.persons.indexOf(person);
+                    $scope.$parent.persons.splice(index, 1);
+                })
+                .error(function (data, status, headers, config) {
+                    console.log('error');
+                });
+        }
+
 
         $http.get(personApiUrl)
             .success(function (data, status, headers, config) {
@@ -165,8 +176,8 @@
         $scope.deleteEvent = function (event) {
             $http.delete(eventApiUrl + '/' + event.Id)
                 .success(function (data, status, headers, config) {
-                    var index = $scope.events.indexOf(event);
-                    $scope.events.splice(index, 1);
+                    var index = $scope.$parent.events.indexOf(event);
+                    $scope.$parent.events.splice(index, 1);
                 })
                 .error(function (data, status, headers, config) {
                     console.log('error');
