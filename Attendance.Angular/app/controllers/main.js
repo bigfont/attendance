@@ -11,7 +11,7 @@
     }
     //#endregion
 
-    app.controller('VisitCtrl', ['$scope', '$http', function ($scope, $http) {
+    app.controller('VisitCtrl', ['$scope', '$http', '$rootScope', function ($scope, $http, $rootScope) {
 
         var visitApiUrl = apiBaseUrl + "/visit";
 
@@ -23,7 +23,7 @@
         $scope.selectedPersons = {};
         $scope.visitDateTime = {};
 
-        $scope.saveVisits = function () {
+        $scope.postVisits = function () {
 
             var visits,
                 selectedEventId,
@@ -58,6 +58,8 @@
             $http.post(visitApiUrl, visits)
                 .success(function (data, status, headers, config) {
                     console.log('success');
+                    $rootScope.$broadcast('postVisitsComplete', null);
+
                 })
                 .error(function (data, status, headers, config) {
                     console.table(data);
@@ -252,12 +254,8 @@
                 });
         }
 
-        // TODO: $on and $emit only work if the emiting controller is a child of the listening controller
-        // so, we'll need to do this through a shared service instead
-        // see also http://stackoverflow.com/questions/11252780/whats-the-correct-way-to-communicate-between-controllers-in-angularjs
-        $scope.$on("updateStatistics", function (event, args) {
-
-            window.alert('hello');
+        $scope.$on("postVisitsComplete", function (event, args) {
+            
             getVisitsSinceInception();
             getVisitsByMonth();
             getVisitsComprehensive();
