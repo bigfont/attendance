@@ -27,18 +27,19 @@
 
             var visits,
                 selectedEventId,
-                date,
-                jsTimestampe,
+                selectedDate,
+                selectedDateAtNoon,                
                 iso8601Date,
                 selectedDateTime;
 
             visits = [];
             selectedEventId = $scope.selectedEvent.Id;
 
-            date = new Date($scope.visitDateTime);
-            jsTimestamp = date.getTime();
-            iso8601Date = date.toJSON();
-            selectedDateTime = iso8601Date;
+            selectedDateAtNoon = new Date($scope.visitDateTime); 
+            selectedDateAtNoon.setHours(0, 0, 0, 0); // midnight on the morning of the selected date
+            selectedDateAtNoonInIso8601Format = selectedDateAtNoon.toJSON();
+
+            console.log(selectedDateAtNoonInIso8601Format);
 
             // iterate persons and add selected ones
             angular.forEach($scope.persons, function (value, key) {
@@ -46,7 +47,7 @@
                     var visit = {
                         PersonId: value.Id,
                         EventId: selectedEventId,
-                        DateTime: selectedDateTime
+                        DateTime: selectedDateAtNoonInIso8601Format
                     };
                     visits.push(visit);
                 }

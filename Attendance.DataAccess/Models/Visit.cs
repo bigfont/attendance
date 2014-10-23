@@ -15,7 +15,6 @@ namespace Attendance.DataAccess.Models
         [Index("IX_PersonIdEventIdDateTime", IsUnique = true, Order = 1)]
         public int EventId { get; set; }
         [Index("IX_PersonIdEventIdDateTime", IsUnique = true, Order = 2)]
-
         public DateTime DateTime { get; set; }
         public virtual Person Person { get; set; }
         public virtual Event Event { get; set; }
