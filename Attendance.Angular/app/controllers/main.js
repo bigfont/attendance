@@ -89,16 +89,16 @@
         }
         initNewPerson();
 
-        $scope.postPerson = function () {
+        $scope.postPerson = function (person) {
             var newPerson = {
-                FirstName: $scope.newPerson.First,
-                LastName: $scope.newPerson.Last,
+                FirstName: person.First,
+                LastName: person.Last,
             };
 
             $http.post(personApiUrl, newPerson)
-                .success(function (data, status, headers, config) {
-                    data.Selected = true;
+                .success(function (data, status, headers, config) {                    
                     $scope.$parent.persons.push(data);
+                    $scope.$parent.selectedPersons.push(data);
                     initNewPerson();
                 })
                 .error(function (data, status, headers, config) { });
