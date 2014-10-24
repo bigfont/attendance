@@ -153,20 +153,22 @@
                                 </legend>
 
                                 <div class="form-group">
-                                    <a href="" class="btn btn-primary btn-sm" ng-click="postVisits()">Save Attendance</a>
+                                    <a href="" class="btn btn-danger" ng-click="postVisits()">Save Attendance</a>
                                 </div>
 
-                                <dl>
-                                    <dt>Event</dt>
-                                    <dd class="bg-danger">{{ selectedEvent.Name }}</dd>
-                                    <dt>Date</dt>
-                                    <dd class="bg-danger"><em>{{ visitDateTime | date:'fullDate' }}</em></dd>
-                                    <dt>Attendance</dt>
-                                    <dd title="{{ selPerson.FirstName + ' ' + selPerson.LastName }}" ng-repeat="selPerson in selectedPersons">
-                                        {{ selPerson.FirstName }}
-                                    </dd>
-                                </dl>
-
+                                <div class="panel panel-danger">
+                                    <div class="panel-heading">
+                                        <h4>{{ selectedEvent.Name }}</h4>
+                                        <h4><em>{{ visitDateTime | date:'EEE, dd MMM, yyyy' }}</em></h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <ol>
+                                            <li title="{{ selPerson.FirstName + ' ' + selPerson.LastName }}" ng-repeat="selPerson in selectedPersons">
+                                                {{ selPerson.FirstName }}
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
 
                             </fieldset>
 
