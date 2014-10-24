@@ -268,8 +268,8 @@
         });
 
         // TODO: consider making these one network call not two
-        getVisitsSinceInception();
-        getVisitsByMonth();
+        ////getVisitsSinceInception();
+        ////getVisitsByMonth();
         getVisitsComprehensive();
 
     }]);
