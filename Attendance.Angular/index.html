@@ -15,6 +15,13 @@
 
     <style>
         /*inline small css for performance*/
+
+        @-moz-document url-prefix() {
+            fieldset {
+                display: table-cell;
+            }
+        }
+
         .checkbox > p {
             padding-left: 20px;
         }
@@ -32,15 +39,14 @@
             max-height: 200px;
         }
 
-        .app-page-header {        
-            background:black;        
-            color:white;
+        .app-page-header {
+            background: black;
+            color: white;
         }
 
         .container {
-            outline:thin double #e4e1e1;
+            outline: thin double #e4e1e1;
         }
-
     </style>
 </head>
 <body>
@@ -60,20 +66,24 @@
                 </div>
                 <div ng-controller="StatisticsCtrl">
 
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th ng-repeat="month in monthNames">{{ month.substring(0,3) }}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="v in visits.comprehensive">
-                                <td>{{ v.Name }}</td>
-                                <td ng-repeat="month in monthNames">{{ v.VisitsByMonth[month.substring(0,3)] }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <!--TODO Consider using something other than a table to render this
+                        because tables are generally nasty beasts, even for tabular data.-->
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th ng-repeat="month in monthNames">{{ month.substring(0,3) }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="v in visits.comprehensive">
+                                    <td>{{ v.Name }}</td>
+                                    <td ng-repeat="month in monthNames">{{ v.VisitsByMonth[month.substring(0,3)] }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
                 </div>
 
