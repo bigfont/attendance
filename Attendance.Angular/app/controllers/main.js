@@ -2,7 +2,7 @@
 
     /* use strict */
 
-    var app = angular.module('attendance', ['ui.bootstrap']);
+    var app = angular.module('attendance', ['ui.bootstrap', 'checklist-model']);
 
     //#region TODO Set this as a app wide constant or service somewhere
     var apiBaseUrl = "http://attendance1-api.azurewebsites.net/api";
@@ -28,29 +28,27 @@
             var visits,
                 selectedEventId,
                 selectedDate,
-                selectedDateAtNoon,                
+                selectedDateAtNoon,
                 iso8601Date,
                 selectedDateTime;
 
             visits = [];
             selectedEventId = $scope.selectedEvent.Id;
 
-            selectedDateAtNoon = new Date($scope.visitDateTime); 
+            selectedDateAtNoon = new Date($scope.visitDateTime);
             selectedDateAtNoon.setHours(0, 0, 0, 0); // midnight on the morning of the selected date
             selectedDateAtNoonInIso8601Format = selectedDateAtNoon.toJSON();
 
             console.log(selectedDateAtNoonInIso8601Format);
 
             // iterate persons and add selected ones
-            angular.forEach($scope.persons, function (value, key) {
-                if (value.Selected) {
-                    var visit = {
-                        PersonId: value.Id,
-                        EventId: selectedEventId,
-                        DateTime: selectedDateAtNoonInIso8601Format
-                    };
-                    visits.push(visit);
-                }
+            angular.forEach($scope.selectedPersons, function (value, key) {
+                var visit = {
+                    PersonId: value.Id,
+                    EventId: selectedEventId,
+                    DateTime: selectedDateAtNoonInIso8601Format
+                };
+                visits.push(visit);
             });
 
             console.table(visits);
@@ -83,6 +81,8 @@
     app.controller('PersonCtrl', ['$scope', '$http', function ($scope, $http) {
 
         var personApiUrl = apiBaseUrl + "/person";
+
+        //$scope.selectedPersons = {};
 
         function initNewPerson() {
             $scope.newPerson = { First: '', Last: '', Id: null };
@@ -125,17 +125,22 @@
                 });
         }
 
+        $scope.getPersons = function () {
+            $http.get(personApiUrl)
+                .success(function (data, status, headers, config) {
 
-        $http.get(personApiUrl)
-            .success(function (data, status, headers, config) {
+                    angular.forEach(data, function (value, key) {
+                        value.Selected = false;
+                    });
 
-                angular.forEach(data, function (value, key) {
-                    value.Selected = false;
-                });
+                    $scope.$parent.persons = data;
+                })
+                .error(function (data, status, headers, config) { });
+        };
 
-                $scope.$parent.persons = data;
-            })
-            .error(function (data, status, headers, config) { });
+        $scope.getPersons();
+
+
     }]);
 
     app.controller('EventCtrl', ['$scope', '$http', function ($scope, $http) {
@@ -255,7 +260,7 @@
         }
 
         $scope.$on("postVisitsComplete", function (event, args) {
-            
+
             getVisitsSinceInception();
             getVisitsByMonth();
             getVisitsComprehensive();
