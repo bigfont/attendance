@@ -135,7 +135,12 @@
 
                     $scope.$parent.persons = data;
                 })
-                .error(function (data, status, headers, config) { });
+                .error(function (data, status, headers, config) {
+                    if (status == 401)
+                    {
+                        console.log('unauthorized');
+                    }
+                });
         };
 
         $scope.getPersons();
