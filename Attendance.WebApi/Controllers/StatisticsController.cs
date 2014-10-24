@@ -10,6 +10,7 @@
     using Attendance.DataAccess.Models;
     using Attendance.WebApi.Models;
     using System.Globalization;
+    using Microsoft.AspNet.Identity.EntityFramework;
 
     [AllowAnonymous]
     public class StatisticsController : ApiController
