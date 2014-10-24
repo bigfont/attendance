@@ -16,7 +16,9 @@ namespace Attendance.WebApi
             EnableCrossSiteRequests(config);
             ConfigureRoutes(config);
 
+#if !DEBUG
             config.Filters.Add(new AuthorizeAttribute());
+#endif
         }
 
         private static void ConfigureRoutes(HttpConfiguration config)

@@ -31,14 +31,60 @@
             overflow-x: visible;
             max-height: 200px;
         }
+
+        .app-page-header {        
+            background:black;        
+            color:white;
+        }
+
+        .container {
+            outline:thin double #e4e1e1;
+        }
+
     </style>
 </head>
 <body>
+
+    <div class="container app-page-header">
+
+        <h1 class="page-header">BigFont Attendance App</h1>
+
+    </div>
+
     <div class="container">
+
         <div class="row">
             <div class="col-md-12">
                 <div class="page-header">
-                    <h1>BigFont.ca Attendance App</h1>
+                    <h1>View Statistics</h1>
+                </div>
+                <div ng-controller="StatisticsCtrl">
+
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th ng-repeat="month in monthNames">{{ month.substring(0,3) }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="v in visits.comprehensive">
+                                <td>{{ v.Name }}</td>
+                                <td ng-repeat="month in monthNames">{{ v.VisitsByMonth[month.substring(0,3)] }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-header">
+                    <h1>Edit Attendance</h1>
                 </div>
                 <div class="alert alert-info"><strong>Note:</strong> You must sign in to edit the attendance.</div>
                 <form role="form" ng-controller="VisitCtrl">
@@ -179,33 +225,8 @@
 
                 </form>
             </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="page-header">
-                        <h1>Statistics</h1>
-                    </div>
-                    <div ng-controller="StatisticsCtrl">
-
-                        <table class="table table-bordered table-hover table-condensed">
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th ng-repeat="month in monthNames">{{ month.substring(0,3) }}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="v in visits.comprehensive">
-                                    <td>{{ v.Name }}</td>
-                                    <td ng-repeat="month in monthNames">{{ v.VisitsByMonth[month.substring(0,3)] }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                    </div>
-
-                </div>
-            </div>
         </div>
+
+    </div>
 </body>
 </html>

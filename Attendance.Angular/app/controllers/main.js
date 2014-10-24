@@ -82,7 +82,7 @@
 
         var personApiUrl = apiBaseUrl + "/person";
 
-        //$scope.selectedPersons = {};
+        $scope.$parent.selectedPersons = [];
 
         function initNewPerson() {
             $scope.newPerson = { First: '', Last: '', Id: null };
