@@ -128,6 +128,9 @@
     <Reference Include="System.Web.Http.Cors">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.2\lib\net45\System.Web.Http.Cors.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Http.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Owin.5.2.2\lib\net45\System.Web.Http.Owin.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -151,9 +154,11 @@
     <Compile Include="App_Start\Identity.Config.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\StatisticsController.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Models\EventStatsDTO.cs" />
+    <Compile Include="Models\RegisterBindingModel.cs" />
     <Compile Include="Models\VisitDTO.cs" />
     <Compile Include="Models\EventDTO.cs" />
     <Compile Include="Controllers\VisitController.cs" />
@@ -164,6 +169,7 @@
     <Compile Include="Models\PersonDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
+    <Compile Include="Results\Results.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
