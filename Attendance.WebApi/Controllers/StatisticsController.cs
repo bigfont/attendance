@@ -11,6 +11,7 @@
     using Attendance.WebApi.Models;
     using System.Globalization;
 
+    [AllowAnonymous]
     public class StatisticsController : ApiController
     {                
         /// <summary>
