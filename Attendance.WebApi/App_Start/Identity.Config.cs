@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Attendance.DataAccess.DAL;
+using Attendance.DataAccess.Models;
 
 namespace Attendance.WebApi
 {
