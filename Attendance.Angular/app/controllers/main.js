@@ -261,8 +261,8 @@
 
         $scope.$on("postVisitsComplete", function (event, args) {
 
-            getVisitsSinceInception();
-            getVisitsByMonth();
+            ////getVisitsSinceInception();
+            ////getVisitsByMonth();
             getVisitsComprehensive();
 
         });
