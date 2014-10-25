@@ -18,6 +18,7 @@ namespace Attendance.WebApi
             SetErrorPolicy();
             EnableCrossSiteRequests(config);
             ConfigureRoutes(config);
+            ConfigureDependencyResolver(config);
 
 #if !DEBUG
             config.Filters.Add(new AuthorizeAttribute());

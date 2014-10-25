@@ -34,12 +34,15 @@ namespace Attendance.WebApi.Controllers
             _emailService = emailService;
         }
 
-        public AccountController(ApplicationUserManager userManager,
-            ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
-        {
-            UserManager = userManager;
-            AccessTokenFormat = accessTokenFormat;
-        }
+        //public AccountController(ApplicationUserManager userManager,
+        //    ISecureDataFormat<AuthenticationTicket> accessTokenFormat,
+        //    IEmailService emailService)
+        //{
+        //    UserManager = userManager;
+        //    AccessTokenFormat = accessTokenFormat;
+        //    _emailService = emailService;
+
+        //}
 
         public ApplicationUserManager UserManager
         {
@@ -95,6 +98,7 @@ namespace Attendance.WebApi.Controllers
                 return GetErrorResult(result);
             }
 
+            _emailService.SendEmailAlert("A user just registered", string.Empty);
             return Ok();
         }
 
