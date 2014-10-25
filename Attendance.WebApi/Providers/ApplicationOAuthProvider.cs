@@ -49,6 +49,9 @@ namespace Attendance.WebApi.Providers
             AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
             context.Validated(ticket);
             context.Request.Context.Authentication.SignIn(cookiesIdentity);
+
+            // allow CORS
+            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
         }
 
         public override Task TokenEndpoint(OAuthTokenEndpointContext context)
