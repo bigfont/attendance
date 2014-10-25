@@ -42,8 +42,6 @@ namespace Attendance.WebApi.Controllers
         {
             get
             {
-                ////return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
-
                 if (_userManager == null)
                 {
                     var owinContext = Request.GetOwinContext();
@@ -74,7 +72,7 @@ namespace Attendance.WebApi.Controllers
         /// TODO We need to secure this, so that not just anyone can create an account.
         /// </remarks>
         /// <example>
-        /// $body = @{ Email = "bigfont@outlook.com"; Password = "test123"; ConfirmPassword = "test123"  } | ConvertTo-JSON
+        /// $body = @{ Email = "bigfont@outlook.com"; Password = "Test123"; ConfirmPassword = "Test123"  } | ConvertTo-JSON
         /// Invoke-RestMethod http://localhost/Attendance.WebApi/api/Account/Register -Method POST -ContentType "application/json" -Body $body
         /// </example>        
         [AllowAnonymous]
