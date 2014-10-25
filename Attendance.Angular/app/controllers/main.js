@@ -336,7 +336,7 @@
 
         $scope.forgetAccessToken = function ()
         {
-            sessionStorage.remoteItem(tokenKey);
+            sessionStorage.removeItem(tokenKey);
         }
 
     }]);
