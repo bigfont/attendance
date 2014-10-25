@@ -17,6 +17,7 @@ using Attendance.WebApi.Models;
 using Attendance.WebApi.Providers;
 using Attendance.WebApi.Results;
 using Attendance.DataAccess.Models;
+using Attendance.WebApi.Services;
 
 namespace Attendance.WebApi.Controllers
 {
@@ -26,9 +27,11 @@ namespace Attendance.WebApi.Controllers
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
+        private IEmailService _emailService;
 
-        public AccountController()
+        public AccountController(IEmailService emailService)
         {
+            _emailService = emailService;
         }
 
         public AccountController(ApplicationUserManager userManager,
