@@ -40,7 +40,7 @@
         }
 
         .app-page-header {
-            background: #80BC42;            
+            background: #80BC42;
             color: white;
         }
 
@@ -54,6 +54,14 @@
     <div class="container app-page-header">
 
         <h1 class="page-header">BigFont Attendance App</h1>
+
+        <form ng-controller="AuthCtrl" class="form-inline">
+            <div class="form-group">
+                <input class="form-control" type="text" placeholder="Email" ng-model="accessTokenRequestData.username" />
+                <input class="form-control" type="password" placeholder="Password" ng-model="accessTokenRequestData.password" />
+                <a href="" class="btn btn-default" ng-click="requestAccessToken(accessTokenRequestData)">Login</a>
+            </div>
+        </form>
 
     </div>
 

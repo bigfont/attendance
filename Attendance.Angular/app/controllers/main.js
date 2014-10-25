@@ -5,7 +5,8 @@
     var app = angular.module('attendance', ['ui.bootstrap', 'checklist-model']);
 
     //#region TODO Set this as a app wide constant or service somewhere
-    var apiBaseUrl = "http://attendance1-api.azurewebsites.net/api";
+    var baseUrl = "http://attendance1-api.azurewebsites.net";
+    var apiBaseUrl = baseUrl + "/api";
     if (window.location.href.indexOf('localhost') >= 0) {
         var apiBaseUrl = 'http://localhost/attendance.webapi/api'
     }
@@ -96,7 +97,7 @@
             };
 
             $http.post(personApiUrl, newPerson)
-                .success(function (data, status, headers, config) {                    
+                .success(function (data, status, headers, config) {
                     $scope.$parent.persons.push(data);
                     $scope.$parent.selectedPersons.push(data);
                     initNewPerson();
@@ -136,8 +137,7 @@
                     $scope.$parent.persons = data;
                 })
                 .error(function (data, status, headers, config) {
-                    if (status == 401)
-                    {
+                    if (status == 401) {
                         console.log('unauthorized');
                     }
                 });
@@ -276,6 +276,46 @@
         ////getVisitsSinceInception();
         ////getVisitsByMonth();
         getVisitsComprehensive();
+
+    }]);
+
+    app.controller('AuthCtrl', ['$scope', '$http', function ($scope, $http) {
+
+        $scope.accessTokenRequestData = {
+            grant_type: 'password',
+            username: '',
+            password: ''
+        };        
+
+        $scope.requestAccessToken = function (requestData) {
+
+            var config = {
+                method: 'post',
+                url: baseUrl + '/token',
+                data: requestData,
+                transformRequest: function (obj) {
+                    // transform to form-url-encoded
+                    var str = [];
+                    for (var p in obj)
+                        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                    return str.join("&");
+                },
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            };
+
+            $http(config)
+                .success(function (data, status, headers, config) {
+                    console.log(status);
+                    console.log(data);
+                })
+                .error(function (data, status, headers, config) {
+                    console.log(status);
+                    console.table(data);
+                });
+
+        };
 
     }]);
 
