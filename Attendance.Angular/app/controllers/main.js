@@ -4,6 +4,19 @@
 
     var app = angular.module('attendance', ['ui.bootstrap', 'checklist-model']);
 
+    app.factory('httpRequestInterceptor', function () {
+        return {
+            request: function (config) {
+                config.headers = { 'Authentication': 'Bearer ' + sessionStorage.getItem(tokenKey) }
+                return config;
+            }
+        };
+    });
+
+    app.config(function ($httpProvider) {
+        $httpProvider.interceptors.push('httpRequestInterceptor');
+    });
+
     //#region TODO Set these as a app wide constant or service somewhere
     var baseUrl = "http://attendance1-api.azurewebsites.net";
     var apiBaseUrl = baseUrl + "/api";
@@ -197,13 +210,7 @@
                 });
         }
 
-        // TODO put this somewhere shared
-        var config = {
-            headers: {
-                Authorization: 'Bearer ' + sessionStorage.getItem(tokenKey)
-            }
-        };
-        $http.get(eventApiUrl, config)
+        $http.get(eventApiUrl)
             .success(function (data, status, headers, config) {
                 $scope.$parent.events = data;
                 setSelectedEvent(0);
