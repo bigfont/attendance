@@ -1,5 +1,6 @@
 ﻿using Attendance.WebApi.Resolver;
 using Attendance.WebApi.Services;
+using Microsoft.Owin.Security.OAuth;
 using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,10 @@ namespace Attendance.WebApi
             EnableCrossSiteRequests(config);
             ConfigureRoutes(config);
             ConfigureDependencyResolver(config);
+
+            // Configure Web API to use only bearer token authentication.
+            config.SuppressDefaultHostAuthentication();
+            config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
 
 #if !DEBUG
             config.Filters.Add(new AuthorizeAttribute());

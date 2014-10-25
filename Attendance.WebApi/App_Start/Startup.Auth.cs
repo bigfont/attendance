@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using Attendance.WebApi.Providers;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
+using Attendance.DataAccess.DAL;
+using Attendance.WebApi.Providers;
+
 
 namespace Attendance.WebApi
 {
@@ -19,8 +20,8 @@ namespace Attendance.WebApi
         public static string PublicClientId { get; private set; }
 
         public void ConfigureAuth(IAppBuilder app)
-        {
-            app.CreatePerOwinContext(Attendance.DataAccess.DAL.AttendanceContext.Create);
+        {            
+            app.CreatePerOwinContext<AttendanceContext>(Attendance.DataAccess.DAL.AttendanceContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
 
             // Enable the application to use a cookie to store information for the signed in user
@@ -29,16 +30,21 @@ namespace Attendance.WebApi
             app.UseCookieAuthentication(new CookieAuthenticationOptions());
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
+            System.Diagnostics.Debugger.Break();
+
             // Configure the application for OAuth based flow
-            PublicClientId = "self";
+            PublicClientId = "self"; 
             OAuthOptions = new OAuthAuthorizationServerOptions
             {
+                ///  $body = @{ grant_type = "password"; username = "bigfont@outlook.com"; password = ""  }
+                /// Invoke-RestMethod http://localhost/Attendance.WebApi/token -Method POST -ContentType "application/x-www-form-urlencoded" -Body $body
                 TokenEndpointPath = new PathString("/Token"),
                 Provider = new ApplicationOAuthProvider(PublicClientId),
-                AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromDays(14)
-                //AllowInsecureHttp = true
+                AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
+                AllowInsecureHttp = true // TODO Change this to HTTPS
             };
+
+            app.UseOAuthBearerTokens(OAuthOptions);
         }
     }
 }
