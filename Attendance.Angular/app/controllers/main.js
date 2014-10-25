@@ -7,7 +7,11 @@
     app.factory('httpRequestInterceptor', function () {
         return {
             request: function (config) {
-                config.headers = { 'Authentication': 'Bearer ' + sessionStorage.getItem(tokenKey) }
+                if (config.url.indexOf('/token') < 0)
+                {
+                    // only add the auth header if we're not currently authenticating
+                    config.headers['Authentication'] = 'Bearer ' + sessionStorage.getItem(tokenKey);
+                }
                 return config;
             }
         };
