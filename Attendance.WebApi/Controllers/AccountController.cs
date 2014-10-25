@@ -42,7 +42,14 @@ namespace Attendance.WebApi.Controllers
         {
             get
             {
-                return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                ////return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+
+                if (_userManager == null)
+                {
+                    var owinContext = Request.GetOwinContext();
+                    _userManager = owinContext.GetUserManager<ApplicationUserManager>();
+                }
+                return _userManager;                
             }
             private set
             {
@@ -58,9 +65,18 @@ namespace Attendance.WebApi.Controllers
         {
             Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
             return Ok();
-        }
+        }        
 
-        // POST api/Account/Register
+        /// <summary>
+        /// Register a user with a password.
+        /// </summary>
+        /// <remarks>
+        /// TODO We need to secure this, so that not just anyone can create an account.
+        /// </remarks>
+        /// <example>
+        /// $body = @{ Email = "bigfont@outlook.com"; Password = "test123"; ConfirmPassword = "test123"  } | ConvertTo-JSON
+        /// Invoke-RestMethod http://localhost/Attendance.WebApi/api/Account/Register -Method POST -ContentType "application/json" -Body $body
+        /// </example>        
         [AllowAnonymous]
         [Route("Register")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
@@ -71,7 +87,6 @@ namespace Attendance.WebApi.Controllers
             }
 
             var user = new AttendanceUser() { UserName = model.Email, Email = model.Email };
-
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
             if (!result.Succeeded)

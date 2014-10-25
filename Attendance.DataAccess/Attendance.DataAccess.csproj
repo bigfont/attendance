@@ -136,6 +136,10 @@
     <Compile Include="Migrations\201410222241210_firstLastUnique.Designer.cs">
       <DependentUpon>201410222241210_firstLastUnique.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201410251838598_accounts.cs" />
+    <Compile Include="Migrations\201410251838598_accounts.Designer.cs">
+      <DependentUpon>201410251838598_accounts.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AttendanceUser.cs" />
     <Compile Include="Models\Event.cs" />
@@ -155,6 +159,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201410222241210_firstLastUnique.resx">
       <DependentUpon>201410222241210_firstLastUnique.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410251838598_accounts.resx">
+      <DependentUpon>201410251838598_accounts.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
