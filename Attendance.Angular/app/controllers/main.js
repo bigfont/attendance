@@ -297,7 +297,7 @@
                 url: baseUrl + '/token',
                 data: requestData,
                 transformRequest: function (obj) {
-                    // transform to form-url-encoded
+                    // transform data to form-url-encoded
                     var str = [];
                     for (var p in obj)
                         str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
