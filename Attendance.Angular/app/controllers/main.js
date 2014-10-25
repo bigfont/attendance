@@ -198,8 +198,12 @@
         }
 
         // TODO put this somewhere shared
-        $http.defaults.headers.common.Authorization = 'Bearer ' + sessionStorage.getItem(tokenKey);
-        $http.get(eventApiUrl)
+        var config = {
+            headers: {
+                Authorization: 'Bearer ' + sessionStorage.getItem(tokenKey)
+            }
+        };
+        $http.get(eventApiUrl, config)
             .success(function (data, status, headers, config) {
                 $scope.$parent.events = data;
                 setSelectedEvent(0);
@@ -288,7 +292,7 @@
             grant_type: 'password',
             username: '',
             password: ''
-        };        
+        };
 
         $scope.requestAccessToken = function (requestData) {
 
@@ -304,14 +308,14 @@
                     return str.join("&");
                 },
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
+                    'Content-Type': 'application/x-www-form-urlencoded',
                 }
             };
 
             $http(config)
                 .success(function (data, status, headers, config) {
                     console.log('success');
-                    sessionStorage.setItem(tokenKey, data.access_token);                    
+                    sessionStorage.setItem(tokenKey, data.access_token);
                 })
                 .error(function (data, status, headers, config) {
                     console.log('error');
