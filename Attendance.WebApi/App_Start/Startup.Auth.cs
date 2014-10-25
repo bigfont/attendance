@@ -38,6 +38,7 @@ namespace Attendance.WebApi
             {
                 ///  $body = @{ grant_type = "password"; username = "bigfont@outlook.com"; password = ""  }
                 /// Invoke-RestMethod http://localhost/Attendance.WebApi/token -Method POST -ContentType "application/x-www-form-urlencoded" -Body $body
+                /// Invoke-RestMethod http://attendance1-api.azurewebsites.net/token -Method POST -ContentType "application/x-www-form-urlencoded" -Body $body
                 TokenEndpointPath = new PathString("/Token"),
                 Provider = new ApplicationOAuthProvider(PublicClientId),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
