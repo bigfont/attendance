@@ -10,7 +10,7 @@
                 if (config.url.indexOf('/token') < 0)
                 {
                     // only add the auth header if we're not currently authenticating
-                    config.headers['Authentication'] = 'Bearer ' + sessionStorage.getItem(tokenKey);
+                    config.headers['Authorization'] = 'Bearer ' + sessionStorage.getItem(tokenKey);
                 }
                 return config;
             }
