@@ -334,6 +334,11 @@
 
         };
 
+        $scope.forgetAccessToken = function ()
+        {
+            sessionStorage.remoteItem(tokenKey);
+        }
+
     }]);
 
 }());
