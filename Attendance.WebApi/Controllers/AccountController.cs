@@ -34,16 +34,6 @@ namespace Attendance.WebApi.Controllers
             _emailService = emailService;
         }
 
-        //public AccountController(ApplicationUserManager userManager,
-        //    ISecureDataFormat<AuthenticationTicket> accessTokenFormat,
-        //    IEmailService emailService)
-        //{
-        //    UserManager = userManager;
-        //    AccessTokenFormat = accessTokenFormat;
-        //    _emailService = emailService;
-
-        //}
-
         public ApplicationUserManager UserManager
         {
             get
@@ -78,8 +68,9 @@ namespace Attendance.WebApi.Controllers
         /// TODO We need to secure this, so that not just anyone can create an account.
         /// </remarks>
         /// <example>
-        /// $body = @{ Email = "bigfont@outlook.com"; Password = "Test123%"; ConfirmPassword = "Test123%"  } | ConvertTo-JSON
+        /// $body = @{ Email = "bigfont@outlook.com"; Password = ""; ConfirmPassword = ""  } | ConvertTo-JSON
         /// Invoke-RestMethod http://localhost/Attendance.WebApi/api/Account/Register -Method POST -ContentType "application/json" -Body $body
+        /// Invoke-RestMethod http://Attendance1-Api.azurewebsites.net/api/Account/Register -Method POST -ContentType "application/json" -Body $body
         /// </example>        
         [AllowAnonymous]
         [Route("Register")]
