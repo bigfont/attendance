@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Attendance.WebApi.Resolver;
+using Attendance.WebApi.Services;
+using Microsoft.Practices.Unity;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -69,6 +72,13 @@ namespace Attendance.WebApi
             }
 
             GlobalConfiguration.Configuration.IncludeErrorDetailPolicy = errorDetailPolicy;
+        }
+
+        private static void ConfigureDependencyResolver(HttpConfiguration config)
+        {
+            var container = new UnityContainer();
+            container.RegisterType<IEmailService, EmailService>(new HierarchicalLifetimeManager());
+            config.DependencyResolver = new UnityResolver(container);            
         }
     }
 }
