@@ -28,9 +28,7 @@ namespace Attendance.WebApi
             // and to use a cookie to temporarily store information about a user logging in with a third party login provider
             // [Do we really want to use a cookie? Maybe change this later.]
             app.UseCookieAuthentication(new CookieAuthenticationOptions());
-            app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
-
-            System.Diagnostics.Debugger.Break();
+            app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);                                    
 
             // Configure the application for OAuth based flow
             PublicClientId = "self"; 

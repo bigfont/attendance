@@ -4,9 +4,10 @@
 
     var app = angular.module('attendance', ['ui.bootstrap', 'checklist-model']);
 
-    //#region TODO Set this as a app wide constant or service somewhere
+    //#region TODO Set these as a app wide constant or service somewhere
     var baseUrl = "http://attendance1-api.azurewebsites.net";
     var apiBaseUrl = baseUrl + "/api";
+    var tokenKey = "accessTokenKey";
     if (window.location.href.indexOf('localhost') >= 0) {
         var apiBaseUrl = 'http://localhost/attendance.webapi/api'
     }
@@ -196,6 +197,8 @@
                 });
         }
 
+        // TODO put this somewhere shared
+        $http.defaults.headers.common.Authorization = 'Bearer ' + sessionStorage.getItem(tokenKey);
         $http.get(eventApiUrl)
             .success(function (data, status, headers, config) {
                 $scope.$parent.events = data;
@@ -308,6 +311,7 @@
             $http(config)
                 .success(function (data, status, headers, config) {
                     console.log('success');
+                    sessionStorage.setItem(tokenKey, data.access_token);                    
                 })
                 .error(function (data, status, headers, config) {
                     console.log('error');

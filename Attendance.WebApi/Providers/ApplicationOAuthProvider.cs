@@ -51,6 +51,7 @@ namespace Attendance.WebApi.Providers
             context.Request.Context.Authentication.SignIn(cookiesIdentity);
 
             // allow CORS
+            // see http://stackoverflow.com/questions/21971190/asp-net-web-api-2-owin-authentication-unsuported-grant-type
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
         }
 
