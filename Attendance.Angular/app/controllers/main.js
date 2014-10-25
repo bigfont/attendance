@@ -307,12 +307,10 @@
 
             $http(config)
                 .success(function (data, status, headers, config) {
-                    console.log(status);
-                    console.log(data);
+                    console.log('success');
                 })
                 .error(function (data, status, headers, config) {
-                    console.log(status);
-                    console.table(data);
+                    console.log('error');
                 });
 
         };
