@@ -245,31 +245,6 @@
             'December'
         ];
 
-        // get the total number of visits for each event over its lifetime
-        function getVisitsSinceInception() {
-
-            $http.get(statisticsApiUrl + '/visits/inception')
-                .success(function (data, status, headers, config) {
-                    $scope.visits.all = data;
-                    console.log('success');
-                })
-                .error(function (data, status, headers, config) {
-                    console.log('error');
-                });
-
-        }
-
-        function getVisitsByMonth() {
-            $http.get(statisticsApiUrl + '/visits/month')
-                .success(function (data, status, headers, config) {
-                    $scope.visits.month = data;
-                    console.log('success');
-                })
-                .error(function (data, status, headers, config) {
-                    console.log('error');
-                });
-        }
-
         function getVisitsComprehensive() {
             $http.get(statisticsApiUrl + '/visits/comprehensive')
                 .success(function (data, status, headers, config) {

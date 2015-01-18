@@ -12,42 +12,7 @@
     <link href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" />
     <meta name="description" content="Collect program attendance." />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <style>
-        /*inline small css for performance*/
-
-        @-moz-document url-prefix() {
-            fieldset {
-                display: table-cell;
-            }
-        }
-
-        .checkbox > p {
-            padding-left: 20px;
-        }
-
-        fieldset, .form-inline {
-            margin-bottom: 20px;
-        }
-
-        .scroll {
-            overflow: auto;
-        }
-
-        .scroll-vertical {
-            overflow-x: visible;
-            max-height: 200px;
-        }
-
-        .app-page-header {
-            background: #80BC42;
-            color: white;
-        }
-
-        .container {
-            outline: thin double #bfe19b;
-        }
-    </style>
+    
 </head>
 <body>
 
@@ -71,32 +36,29 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="page-header">
-                    <h1>View Statistics</h1>
+                    <h1>Statistics</h1>
                 </div>
                 <div ng-controller="StatisticsCtrl">
 
-                    <div class="table-responsive">
-                        <!--TODO Consider using something other than a table to render this
-                        because tables are generally nasty beasts, even for tabular data.-->
-                        <table class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th ng-repeat="month in monthNames">{{ month.substring(0,3) }}</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </div>
-
                     <pre>
-                    {{
-                        visits.comprehensive | json
-                    }}
-                    </pre>
+{{ visits.comprehensive | json }}
+</pre>
 
+                    <div class="panel panel-info" ng-repeat="event in visits.comprehensive">
+                        <div class="panel-heading">{{event.Name}}</div>
+                        <div class="panel-body">
+                            <div ng-repeat="year in event.YearCounts">
+
+                                <h4>{{ year.Year }}</h4>
+                                <ul class="list-unstyled">
+                                    <li ng-repeat="month in monthNames">
+                                        {{ month }} 
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
             </div>
         </div>
 

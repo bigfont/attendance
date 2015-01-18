@@ -43,7 +43,7 @@
                             Name = l.Key,
                             YearCounts = l
                                 .GroupBy(x => x.Year, x => new { x.Month, x.Count })
-                                .Select(x => new YearCount { Year = x.Key, MonthCounts = x.Select(y => new MonthCount() { Month = y.Month, Count = y.Count }) })
+                                .Select(x => new YearCount { Year = x.Key, MonthCounts = x.Select(y => new MonthCount() { Month = y.Month, MonthAbbr = ConvertMonthNumberIntoAbbreviatedMonthName(y.Month), Count = y.Count }) })
                         }
                     );
 
