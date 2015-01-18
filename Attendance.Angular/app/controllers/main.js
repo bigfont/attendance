@@ -283,15 +283,10 @@
 
         $scope.$on("postVisitsComplete", function (event, args) {
 
-            ////getVisitsSinceInception();
-            ////getVisitsByMonth();
             getVisitsComprehensive();
 
         });
 
-        // TODO: consider making these one network call not two
-        ////getVisitsSinceInception();
-        ////getVisitsByMonth();
         getVisitsComprehensive();
 
     }]);
