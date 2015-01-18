@@ -6,14 +6,24 @@ using System.Text;
 namespace Attendance.WebApi.Models
 {
 
+    public class MonthCount
+    {
+        public int Month { get; set; }
+        public int Count { get; set; }
+    }
+
+    public class YearCount
+    {
+        public int Year { get; set; }
+
+        public IEnumerable<MonthCount> MonthCounts { get; set; }
+    }
+
     public class EventStatsDTO
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
-        public IEnumerable<KeyValuePair<string, int>> VisitsByMonth { get; set; }
+        public IEnumerable<YearCount> YearCounts { get; set; }
 
-        public int VisitsSinceInception { get; set; }
     }
 }

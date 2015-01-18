@@ -14,7 +14,7 @@
 
     [AllowAnonymous]
     public class StatisticsController : ApiController
-    {                
+    {
         /// <summary>
         /// Get a comprehensive set of event statistics
         /// </summary>
@@ -25,24 +25,28 @@
         [Route("api/statistics/visits/comprehensive")]
         public IHttpActionResult GetVisitsComprehensive()
         {
-            IEnumerable<EventStatsDTO> stats;
+            IEnumerable<dynamic> stats;
             using (AttendanceContext db = new AttendanceContext())
             {
                 var query = db.Visits
                     .GroupBy(
-                        v => new { v.EventId, EventName = v.Event.Name, v.DateTime.Month }, // grouping terms
-                        (key, group) => new { key.EventId, key.EventName, key.Month, Count = group.Count() }) // projection
+                            v => new { Name = v.Event.Name, v.DateTime.Year, v.DateTime.Month }, // grouping terms
+                            (key, group) => new { key.Name, key.Year, key.Month, Count = group.Count() } // projection
+                    )
                     .ToLookup(
-                        l => new { l.EventId, l.EventName }, 
-                        l => new { l.Month, l.Count })
+                        g => g.Name, // lookup key
+                        g => new { g.Year, g.Month, g.Count } // projection
+                    )
                     .Select(
-                        l => new EventStatsDTO()
-                            {
-                                Id = l.Key.EventId,
-                                Name = l.Key.EventName,
-                                VisitsSinceInception = l.Sum(x => x.Count),
-                                VisitsByMonth = l.Select(x => x).ToDictionary(x => ConvertMonthNumberIntoAbbreviatedMonthName(x.Month), x => x.Count)
-                            });
+                        l => new EventStatsDTO
+                        {
+                            Name = l.Key,
+                            YearCounts = l
+                                .GroupBy(x => x.Year, x => new { x.Month, x.Count })
+                                .Select(x => new YearCount { Year = x.Key, MonthCounts = x.Select(y => new MonthCount() { Month = y.Month, Count = y.Count }) })
+                        }
+                    );
+
                 stats = query.ToList();
             }
 
@@ -54,7 +58,7 @@
             DateTimeFormatInfo dateInfo = new DateTimeFormatInfo();
             var fullName = dateInfo.GetMonthName(monthNumber);
             var abbrName = fullName.Substring(0, 3);
-            return abbrName;            
+            return abbrName;
         }
     }
 }

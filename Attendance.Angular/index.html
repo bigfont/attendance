@@ -85,14 +85,15 @@
                                     <th ng-repeat="month in monthNames">{{ month.substring(0,3) }}</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr ng-repeat="v in visits.comprehensive">
-                                    <td>{{ v.Name }}</td>
-                                    <!--<td ng-repeat="month in monthNames">{{ v.VisitsByMonth[month.substring(0,3)] }}</td>-->
-                                </tr>
-                            </tbody>
+                            <tbody></tbody>
                         </table>
                     </div>
+
+                    <pre>
+                    {{
+                        visits.comprehensive | json
+                    }}
+                    </pre>
 
                 </div>
 
