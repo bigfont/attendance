@@ -2,13 +2,21 @@
 
     /* use strict */
 
+    //#region TODO Set these as a app wide constant or service somewhere
+    var baseUrl = "http://attendance1-api.azurewebsites.net";
+    var apiBaseUrl = baseUrl + "/api";
+    var tokenKey = "accessTokenKey";
+    if (window.location.href.indexOf('localhost') >= 0) {
+        var apiBaseUrl = 'http://localhost/attendance.webapi/api'
+    }
+    //#endregion
+
     var app = angular.module('attendance', ['ui.bootstrap', 'checklist-model']);
 
     app.factory('httpRequestInterceptor', function () {
         return {
             request: function (config) {
-                if (config.url.indexOf('/token') < 0)
-                {
+                if (config.url.indexOf('/token') < 0) {
                     // only add the auth header if we're not currently authenticating
                     config.headers['Authorization'] = 'Bearer ' + sessionStorage.getItem(tokenKey);
                 }
@@ -20,15 +28,6 @@
     app.config(function ($httpProvider) {
         $httpProvider.interceptors.push('httpRequestInterceptor');
     });
-
-    //#region TODO Set these as a app wide constant or service somewhere
-    var baseUrl = "http://attendance1-api.azurewebsites.net";
-    var apiBaseUrl = baseUrl + "/api";
-    var tokenKey = "accessTokenKey";
-    if (window.location.href.indexOf('localhost') >= 0) {
-        var apiBaseUrl = 'http://localhost/attendance.webapi/api'
-    }
-    //#endregion
 
     app.controller('VisitCtrl', ['$scope', '$http', '$rootScope', function ($scope, $http, $rootScope) {
 
@@ -334,8 +333,7 @@
 
         };
 
-        $scope.forgetAccessToken = function ()
-        {
+        $scope.forgetAccessToken = function () {
             sessionStorage.remoteItem(tokenKey);
         }
 
