@@ -9,7 +9,7 @@ namespace Attendance.WebApi.Models
     public class MonthCount
     {
         public int Month { get; set; }
-        public string MonthAbbr { get; set; }
+        public string MonthName { get; set; }
         public int Count { get; set; }
     }
 

@@ -12,7 +12,24 @@
     <link href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" />
     <meta name="description" content="Collect program attendance." />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+
+    <style>
+
+        li.month-count {
+            padding:4px;
+        }
+
+        li.month-count > label {
+            width: 90px;
+            margin:0;
+            border-radius:4px;
+        }
+
+        li.month-count:nth-child(odd) {
+            background-color:white;
+        }
+    </style>
+
 </head>
 <body>
 
@@ -39,22 +56,23 @@
                     <h1>Statistics</h1>
                 </div>
                 <div ng-controller="StatisticsCtrl">
-
-                    <pre>
-{{ visits.comprehensive | json }}
-</pre>
-
                     <div class="panel panel-info" ng-repeat="event in visits.comprehensive">
                         <div class="panel-heading">{{event.Name}}</div>
                         <div class="panel-body">
-                            <div ng-repeat="year in event.YearCounts">
-
-                                <h4>{{ year.Year }}</h4>
-                                <ul class="list-unstyled">
-                                    <li ng-repeat="month in monthNames">
-                                        {{ month }} 
-                                    </li>
-                                </ul>
+                            <div class="row">
+                                <div class="col-md-3" ng-repeat="year in event.YearCounts">
+                                    <div class="well">
+                                        <h4>{{ year.Year }}</h4>
+                                        <ul class="list-unstyled">
+                                            <li class="month-count" ng-repeat="month in monthNames">
+                                                <label>{{ month }}</label>
+                                                <span >
+                                                    {{ monthCount(year.MonthCounts, month) }}
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -256,6 +256,27 @@
                 });
         }
 
+        function findInArray(array, attr, value) {
+            for (var i = 0; i < array.length; i++)
+            {
+                if (array[i][attr] === value)
+                {
+                    return i;
+                }
+            }
+        }
+
+        $scope.monthCount = function (array, monthToFind)
+        {
+            var index,
+                month;
+
+            index = findInArray(array, "MonthName", monthToFind);
+            month = array[index];
+
+            return month != null ? month.Count : "Nobody";
+        }
+
         $scope.$on("postVisitsComplete", function (event, args) {
 
             getVisitsComprehensive();

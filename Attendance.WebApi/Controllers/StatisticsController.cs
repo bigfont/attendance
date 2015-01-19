@@ -43,7 +43,7 @@
                             Name = l.Key,
                             YearCounts = l
                                 .GroupBy(x => x.Year, x => new { x.Month, x.Count })
-                                .Select(x => new YearCount { Year = x.Key, MonthCounts = x.Select(y => new MonthCount() { Month = y.Month, MonthAbbr = ConvertMonthNumberIntoAbbreviatedMonthName(y.Month), Count = y.Count }) })
+                                .Select(x => new YearCount { Year = x.Key, MonthCounts = x.Select(y => new MonthCount() { Month = y.Month, MonthName = ConvertMonthNumberToMonthName(y.Month), Count = y.Count }) })
                         }
                     );
 
@@ -53,12 +53,11 @@
             return this.Ok(stats);
         }
 
-        private string ConvertMonthNumberIntoAbbreviatedMonthName(int monthNumber)
+        private string ConvertMonthNumberToMonthName(int monthNumber)
         {
             DateTimeFormatInfo dateInfo = new DateTimeFormatInfo();
             var fullName = dateInfo.GetMonthName(monthNumber);
-            var abbrName = fullName.Substring(0, 3);
-            return abbrName;
+            return fullName;
         }
     }
 }
